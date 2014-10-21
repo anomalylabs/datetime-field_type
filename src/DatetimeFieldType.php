@@ -4,6 +4,8 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAddon;
 
 class DatetimeFieldType extends FieldTypeAddon
 {
+    protected $slug = 'datetime';
+
     /**
      * The database column type this field type uses.
      *
