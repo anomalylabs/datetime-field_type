@@ -1,23 +1,17 @@
 {
-    "name": "streams/datetime-field-type",
-    "description": "Datetime field type for Streams Platform",
-    "type": "streams-field-type",
-    "version" : "1.0.0",
+    "name": "anomaly/datetime-field-type",
+    "type": "streams-addon",
+    "description": "Datetime field type.",
     "authors": [
         {
             "name": "AnomalyLabs",
-            "email": "projects@aiwebsystems.com"
+            "email": "hello@anomaly.is"
         }
     ],
-    "source" : {
-        "type" : "vcs",
-        "url" : "git@github.com:anomalylabs/country-field-type.git",
-        "reference" : "master"
-    },
-    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

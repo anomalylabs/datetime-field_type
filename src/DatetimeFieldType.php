@@ -1,4 +1,4 @@
-<?php namespace Streams\Addon\FieldType\Datetime;
+<?php namespace Anomaly\Streams\FieldType\Datetime;
 
 use Streams\Core\Addon\FieldTypeAbstract;
 
