@@ -1,8 +1,8 @@
-<?php namespace Anomaly\Streams\FieldType\Datetime;
+<?php namespace Anomaly\Streams\Addon\FieldType\Datetime;
 
-use Streams\Core\Addon\FieldTypeAbstract;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAddon;
 
-class DatetimeFieldType extends FieldTypeAbstract
+class DatetimeFieldType extends FieldTypeAddon
 {
     /**
      * The database column type this field type uses.
