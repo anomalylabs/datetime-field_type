@@ -39,8 +39,8 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
 
     /**
-     * Return the difference from now in
-     * human readable format.
+     * Return the difference from now or
+     * other in human readable format.
      *
      * @return null|string
      */
@@ -55,6 +55,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         return null;
     }
 
+    /**
+     * Return the value and difference from now
+     * or other in human readable format.
+     *
+     * @param null $other
+     * @return null|string
+     */
     public function valueAndDiffForHumans($other = null)
     {
         if ($this->carbon instanceof Carbon) {
