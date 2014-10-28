@@ -55,5 +55,20 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         return null;
     }
 
+    public function valueAndDiffForHumans($other = null)
+    {
+        if ($this->carbon instanceof Carbon) {
+
+            $value = $this->resource->getValue();
+
+            $diff = $this->carbon->diffForHumans($other);
+
+            return "{$value} <span class=\"text-muted\">({$diff})</span>";
+
+        }
+
+        return null;
+    }
+
 }
  
