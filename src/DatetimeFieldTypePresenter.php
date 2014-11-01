@@ -26,12 +26,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      *
      * @param $resource
      */
-    public function __construct($resource)
+    public function __construct(DatetimeFieldType $resource)
     {
-        if ($value = $resource->getValue()) {
+        $value = $resource->getValue();
+
+        if ($value and !$resource->isZeros()) {
 
             $this->carbon = new Carbon($value);
-
         }
 
         parent::__construct($resource);
@@ -49,7 +50,6 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         if ($this->carbon instanceof Carbon) {
 
             return $this->carbon->diffForHumans($other);
-
         }
 
         return null;
@@ -71,11 +71,9 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
             $diff = $this->carbon->diffForHumans($other);
 
             return "{$value} <span class=\"text-muted\">({$diff})</span>";
-
         }
 
         return null;
     }
-
 }
  
