@@ -11,7 +11,7 @@ class DatetimeFieldType extends FieldTypeAddon
     {
         if (is_numeric($value)) {
 
-            $value = 'Y-m-d H:i:s';
+            $value = date('Y-m-d H:i:s', $value);
         }
 
         return $value;
