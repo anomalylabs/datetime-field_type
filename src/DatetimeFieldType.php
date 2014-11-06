@@ -5,7 +5,7 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 class DatetimeFieldType extends FieldType
 {
 
-    public $columnType = 'datetime';
+    protected $columnType = 'datetime';
 
     public function onSet($value)
     {
