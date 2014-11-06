@@ -7,7 +7,7 @@ class DatetimeFieldType extends FieldType
 
     protected $columnType = 'datetime';
 
-    public function onSet($value)
+    protected function onSet($value)
     {
         if (is_numeric($value)) {
 
