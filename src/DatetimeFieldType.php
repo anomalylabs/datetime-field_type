@@ -27,7 +27,7 @@ class DatetimeFieldType extends FieldType
      * @param $value
      * @return mixed
      */
-    public function mutate($value)
+    /*public function mutate($value)
     {
         $format = $this->getConfig('php_format', $this->getDefaultPhpFormat());
 
@@ -39,7 +39,7 @@ class DatetimeFieldType extends FieldType
         }
 
         return $datetime->getTimestamp();
-    }
+    }*/
 
     /**
      * Get the view data for the input.
