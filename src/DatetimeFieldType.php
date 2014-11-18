@@ -6,9 +6,4 @@ class DatetimeFieldType extends FieldType
 {
 
     protected $columnType = 'datetime';
-
-    public function isZeros()
-    {
-        return (starts_with($this->getValue(), '00'));
-    }
 }
