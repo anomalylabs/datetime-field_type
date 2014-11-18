@@ -15,31 +15,6 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 {
 
     /**
-     * The carbon instance loaded with our value.
-     *
-     * @var \Carbon\Carbon
-     */
-    protected $carbon;
-
-    /**
-     * Create a new DatetimeFieldTypePresenter instance.
-     *
-     * @param $resource
-     */
-    public function __construct(DatetimeFieldType $resource)
-    {
-        $value = $resource->getValue();
-
-        if ($value and !$resource->isZeros()) {
-
-            $this->carbon = new Carbon($value);
-        }
-
-        parent::__construct($resource);
-    }
-
-
-    /**
      * Return the difference from now or
      * other in human readable format.
      *
@@ -47,9 +22,11 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      */
     public function diffForHumans($other = null)
     {
-        if ($this->carbon instanceof Carbon) {
+        $value = $this->resource->getValue();
 
-            return $this->carbon->diffForHumans($other);
+        if ($value instanceof Carbon) {
+
+            return $value->diffForHumans($other);
         }
 
         return null;
@@ -64,11 +41,11 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      */
     public function valueAndDiffForHumans($other = null)
     {
-        if ($this->carbon instanceof Carbon) {
+        $value = $this->resource->getValue();
 
-            $value = $this->resource->getValue();
+        if ($value instanceof Carbon) {
 
-            $diff = $this->carbon->diffForHumans($other);
+            $diff = $value->diffForHumans($other);
 
             return "{$value} <span class=\"text-muted\">({$diff})</span>";
         }
