@@ -33,6 +33,11 @@ class DatetimeFieldType extends FieldType
 
         $datetime = \DateTime::createFromFormat($value, $format);
 
+        if (!$datetime instanceof \DateTime) {
+
+            return null;
+        }
+
         return $datetime->getTimestamp();
     }
 
