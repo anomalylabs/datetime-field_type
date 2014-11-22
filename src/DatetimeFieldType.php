@@ -1,5 +1,6 @@
 <?php namespace Anomaly\Streams\Addon\FieldType\Datetime;
 
+use Anomaly\Streams\Platform\Addon\FieldType\Contract\DateFieldTypeInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 
 /**
@@ -10,7 +11,7 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\Streams\Addon\FieldType\Datetime
  */
-class DatetimeFieldType extends FieldType
+class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
 {
 
     /**
