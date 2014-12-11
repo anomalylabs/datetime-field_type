@@ -30,7 +30,7 @@ class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
      */
     /*public function mutate($value)
     {
-        $format = $this->getConfig('php_format', $this->getDefaultPhpFormat());
+        $format = $this->pullConfig('php_format', $this->getDefaultPhpFormat());
 
         $datetime = \DateTime::createFromFormat($value, $format);
 
@@ -52,8 +52,8 @@ class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
         $data = parent::getInputData();
 
         // Get plugin options.
-        $data['format']   = $this->getConfig('format', $this->getDefaultFormat());
-        $data['step']     = $this->getConfig('step', 1);
+        $data['format']   = $this->pullConfig('format', $this->getDefaultFormat());
+        $data['step']     = $this->pullConfig('step', 1);
         $data['pickTime'] = $this->getPickTime();
 
         // Wrap up with some convenient stuff..
@@ -70,7 +70,7 @@ class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
      */
     public function getColumnType()
     {
-        $mode = $this->getConfig('mode', 'datetime');
+        $mode = $this->pullConfig('mode', 'datetime');
 
         switch ($mode) {
 
