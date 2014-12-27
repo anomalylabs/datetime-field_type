@@ -1,0 +1,18 @@
+{{ add_asset("streams.css", "field_type.datetime::css/bootstrap-datetimepicker.css") }}
+
+{{ add_asset("streams.js", "field_type.datetime::js/moment-with-locales.min.js") }}
+{{ add_asset("streams.js", "field_type.datetime::js/bootstrap-datetimepicker.min.js") }}
+{{ add_asset("streams.js", "field_type.datetime::js/input.js") }}
+
+<input
+        type="text"
+        name="{{ name }}"
+        value="{{ value }}"
+        class="{{ class }}"
+        placeholder="{{ placeholder }}"
+        data-toggle="datetime"
+        date-date-format="{{ format }}"
+        data-date-language="{{ locale }}"
+        date-date-minuteStepping="{{ step }}"
+        data-date-pickTime="{{ pickTime ? 'true' : 'false' }}"
+        >
