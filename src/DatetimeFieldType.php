@@ -19,7 +19,7 @@ class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
      *
      * @var string
      */
-    protected $inputView = 'field_type.datetime::input';
+    protected $inputView = 'anomaly.field_type.datetime::input';
 
     /**
      * Mutate the value being set on the entry. Basically we will
