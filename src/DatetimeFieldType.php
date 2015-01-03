@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\FieldType\Datetime;
+<?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\Contract\DateFieldTypeInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;

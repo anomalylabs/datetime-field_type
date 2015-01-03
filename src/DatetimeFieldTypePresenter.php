@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\FieldType\Datetime;
+<?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Carbon\Carbon;
