@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/datetime-field-type",
+    "name": "anomaly/datetime-field_type",
     "type": "streams-addon",
     "description": "Datetime field type.",
     "authors": [
