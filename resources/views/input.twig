@@ -6,13 +6,13 @@
 
 <input
         type="text"
-        name="{{ name }}"
-        value="{{ value }}"
-        class="{{ class }}"
+        name="{{ field_type.getFieldName() }}"
+        value="{{ field_type.value }}"
+        class="{{ field_type.class }}"
         placeholder="{{ placeholder }}"
         data-toggle="datetime"
-        date-date-format="{{ format }}"
-        data-date-language="{{ locale }}"
-        date-date-minuteStepping="{{ step }}"
-        data-date-pickTime="{{ pickTime ? 'true' : 'false' }}"
+        data-date-language="{{ field_type.locale }}"
+        data-date-format="{{ field_type.config.format }}"
+        data-date-minuteStepping="{{ field_type.config.step }}"
+        data-date-pickTime="{{ field_type.config.pick_time ? 'true' : 'false' }}"
         >

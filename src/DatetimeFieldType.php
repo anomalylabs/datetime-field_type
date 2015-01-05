@@ -22,55 +22,13 @@ class DatetimeFieldType extends FieldType implements DateFieldTypeInterface
     protected $inputView = 'anomaly.field_type.datetime::input';
 
     /**
-     * Mutate the value being set on the entry. Basically we will
-     * mutate this into a timestamp so Eloquent can use it easily.
-     *
-     * @param $value
-     * @return mixed
-     */
-    /*public function mutate($value)
-    {
-        $format = $this->pullConfig('php_format', $this->getDefaultPhpFormat());
-
-        $datetime = \DateTime::createFromFormat($value, $format);
-
-        if (!$datetime instanceof \DateTime) {
-
-            return null;
-        }
-
-        return $datetime->getTimestamp();
-    }*/
-
-    /**
-     * Get the view data for the input.
-     *
-     * @return array
-     */
-    public function getInputData()
-    {
-        $data = parent::getInputData();
-
-        // Get plugin options.
-        $data['format']   = $this->pullConfig('format', $this->getDefaultFormat());
-        $data['step']     = $this->pullConfig('step', 1);
-        $data['pickTime'] = $this->getPickTime();
-
-        // Wrap up with some convenient stuff..
-        $data['placeholder'] = $this->getPlaceholder($data['format']);
-
-        return $data;
-    }
-
-
-    /**
      * Get the column type based on config mode.
      *
      * @return array|null|string
      */
     public function getColumnType()
     {
-        $mode = $this->pullConfig('mode', 'datetime');
+        $mode = array_get($this->config, 'mode', 'datetime');
 
         switch ($mode) {
 
