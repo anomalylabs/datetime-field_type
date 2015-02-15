@@ -1,18 +1,17 @@
 {{ asset_add("styles.css", "anomaly.field_type.datetime::css/bootstrap-datetimepicker.css") }}
-
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/moment-with-locales.min.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/bootstrap-datetimepicker.min.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
 
 <input
         type="text"
-        name="{{ field_type.getInputName() }}"
-        value="{{ field_type.value }}"
-        class="{{ field_type.class }}"
-        placeholder="{{ placeholder }}"
+        class="form-control"
         data-toggle="datetime"
-        data-date-language="{{ field_type.locale }}"
-        data-date-format="{{ field_type.config.format }}"
-        data-date-minuteStepping="{{ field_type.config.step }}"
-        data-date-pickTime="{{ field_type.config.pick_time ? 'true' : 'false' }}"
+        value="{{ field_type.value }}"
+        name="{{ field_type.getInputName() }}"
+        placeholder="{{ field_type.config.placeholder }}"
+        data-date-language="{{ field_type.locale ?: config_get('app.locale') }}"
+        data-date-format="{{ field_type.config.format ?: 'MM/DD/YYYY hh:mm A' }}"
+        data-date-minuteStepping="{{ field_type.config.step ?: 5 }}"
+        data-date-pickTime="true"
         >

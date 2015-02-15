@@ -1,13 +1,27 @@
 {
     "name": "anomaly/datetime-field_type",
     "type": "streams-addon",
-    "description": "Datetime field type.",
+    "description": "A date and time picker field type.",
+    "keywords": [
+        "streams-addon",
+        "datetime",
+        "pyrocms",
+        "laravel"
+    ],
+    "homepage": "http://anomaly.is/",
+    "version": "1.0.0-alpha",
+    "license": "MIT",
     "authors": [
         {
-            "name": "AnomalyLabs",
-            "email": "hello@anomaly.is"
+            "name": "AnomalyLabs, Inc.",
+            "email": "hello@anomaly.is",
+            "homepage": "http://anomaly.is/",
+            "role": "Owner"
         }
     ],
+    "support": {
+        "email": "support@anomaly.is"
+    },
     "autoload": {
         "psr-4": {
             "Anomaly\\DatetimeFieldType\\": "src/"

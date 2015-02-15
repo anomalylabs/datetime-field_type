@@ -2,5 +2,5 @@
 
 return [
     'name'        => 'Datetime',
-    'description' => 'Datetime field type.',
+    'description' => 'A date and time picker field type.'
 ];
