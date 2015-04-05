@@ -1,17 +1,38 @@
-{{ asset_add("styles.css", "anomaly.field_type.datetime::css/datetimepicker.css") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/moment-with-locales.min.js") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/datetimepicker.js") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
+{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js", ["debug"]) }}
 
-<input
-        type="text"
-        class="form-control"
-        data-toggle="datetime"
-        value="{{ field_type.value }}"
-        name="{{ field_type.getInputName() }}"
-        placeholder="{{ field_type.config.placeholder }}"
-        data-date-language="{{ field_type.locale ?: config_get('app.locale') }}"
-        data-date-format="{{ field_type.config.format ?: 'MM/DD/YYYY hh:mm A' }}"
-        data-date-minuteStepping="{{ field_type.config.step ?: 5 }}"
-        data-date-pickTime="true"
-        >
+<div class="input-group">
+
+    {% if field_type.config.mode in ['date', 'datetime'] %}
+
+        <span class="input-group-addon">
+            <i class="fui-calendar"></i>
+        </span>
+
+        <input
+                type="text"
+                class="form-control datepicker"
+                value="{{ field_type.format() }}"
+                name="{{ field_type.getInputName() }}[date]"
+                placeholder="{{ 'now'|date(field_type.formats.php) }}"
+                data-date-format="{{ field_type.formats.plugin }}">
+
+    {% endif %}
+
+
+    {% if field_type.config.mode in ['time', 'datetime'] %}
+
+        <span class="input-group-addon">
+            <i class="fui-time"></i>
+        </span>
+
+        <input
+                type="text"
+                class="form-control timepicker"
+                value="{{ field_type.format(field_type.config.time_format) }}"
+                name="{{ field_type.getInputName() }}[time]"
+                placeholder="{{ 'now'|date(field_type.config.time_format) }}"
+                data-time-format="{{ field_type.config.time_format }}">
+
+    {% endif %}
+
+</div>
