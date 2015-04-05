@@ -16,6 +16,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
     /**
      * The datetime field type.
+     * This is for IDE hinting.
      *
      * @var DatetimeFieldType
      */
