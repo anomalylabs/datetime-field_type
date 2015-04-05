@@ -28,11 +28,10 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      * @param null $format
      * @return null|string
      */
-    public function format($format = null)
+    public function format($format = 'm/d/Y')
     {
-        $zero   = $this->object->getZero();
-        $value  = $this->object->getValue();
-        $format = $format ?: $this->object->getFormat();
+        $zero  = $this->object->getZero();
+        $value = $this->object->getValue();
 
         if ($value && $value !== $zero && $date = new Carbon($value)) {
             return $date->format($format);

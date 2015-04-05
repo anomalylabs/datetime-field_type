@@ -73,11 +73,11 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Get the formats for PHP / plugin.
+     * Get the date format for PHP / plugin.
      *
      * @return array
      */
-    public function getFormats()
+    protected function getDateFormat()
     {
         $formats = explode('|', $this->config['date_format']);
 
@@ -88,12 +88,54 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Get the PHP format.
+     * Get the PHP date format.
+     *
+     * @return string
+     */
+    public function getPhpDateFormat()
+    {
+        return $this->getDateFormat()['php'];
+    }
+
+    /**
+     * Get the plugin date format.
+     *
+     * @return string
+     */
+    public function getPluginDateFormat()
+    {
+        return $this->getDateFormat()['plugin'];
+    }
+
+    /**
+     * Get the time format.
+     *
+     * @return string
+     */
+    public function getTimeFormat()
+    {
+        return array_get($this->config, 'time_format');
+    }
+
+    /**
+     * Get the format.
      *
      * @return string
      */
     public function getFormat()
     {
-        return array_get($this->getFormats(), 'php');
+        $format = [];
+
+        $mode = array_get($this->config, 'mode');
+
+        if (in_array($mode, ['date', 'datetime'])) {
+            $format[] = $this->getPhpDateFormat();
+        }
+
+        if (in_array($mode, ['time', 'datetime'])) {
+            $format[] = $this->getTimeFormat();
+        }
+
+        return implode(' ', $format);
     }
 }

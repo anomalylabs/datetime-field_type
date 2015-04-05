@@ -11,10 +11,10 @@
         <input
                 type="text"
                 class="form-control datepicker"
-                value="{{ field_type.format() }}"
+                value="{{ field_type.format(field_type.getPhpDateFormat()) }}"
                 name="{{ field_type.getInputName() }}[date]"
-                placeholder="{{ 'now'|date(field_type.formats.php) }}"
-                data-date-format="{{ field_type.formats.plugin }}">
+                placeholder="{{ 'now'|date(field_type.getPhpDateFormat()) }}"
+                data-date-format="{{ field_type.getPluginDateFormat() }}">
 
     {% endif %}
 
@@ -31,7 +31,7 @@
                 value="{{ field_type.format(field_type.config.time_format) }}"
                 name="{{ field_type.getInputName() }}[time]"
                 placeholder="{{ 'now'|date(field_type.config.time_format) }}"
-                data-time-format="{{ field_type.config.time_format }}">
+                data-time-format="{{ field_type.getTimeFormat() }}">
 
     {% endif %}
 
