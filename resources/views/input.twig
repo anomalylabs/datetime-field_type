@@ -11,7 +11,7 @@
         <input
                 type="text"
                 class="form-control datepicker"
-                name="{{ field_type.getInputName() }}[date]"
+                name="{{ field_type.input_name }}[date]"
                 value="{{ field_type.format(field_type.getPhpDateFormat()) }}"
                 placeholder="{{ 'now'|date(field_type.getPhpDateFormat()) }}"
                 data-date-format="{{ field_type.getPluginDateFormat() }}">
@@ -28,7 +28,7 @@
         <input
                 type="text"
                 class="form-control timepicker"
-                name="{{ field_type.getInputName() }}[time]"
+                name="{{ field_type.input_name }}[time]"
                 value="{{ field_type.format(field_type.config.time_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.time_format) }}"
                 data-time-format="{{ field_type.getTimeFormat() }}"
