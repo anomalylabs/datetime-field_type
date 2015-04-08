@@ -15,7 +15,7 @@ $(function () {
     $('.timepicker').each(function () {
         $(this).timepicker({
             timeFormat: $(this).data('time-format'),
-            step: $(this).data('time-step'),
+            step: $(this).data('step'),
             scrollDefault: 'now'
         });
     });
