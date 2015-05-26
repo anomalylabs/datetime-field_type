@@ -39,7 +39,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if (is_numeric($value)) {
-            return new Carbon($value);
+            return (new Carbon())->createFromTimestamp($value);
         }
 
         return $value;
