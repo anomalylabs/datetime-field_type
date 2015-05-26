@@ -30,6 +30,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function modify($value)
     {
+        if (!$value) {
+            return null;
+        }
+
+        return $value;
+
         $mode = $this->fieldType->getColumnType();
 
         $date = (new Carbon())->createFromFormat($this->fieldType->getFormat(), implode(' ', (array)$value));
@@ -47,5 +53,20 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         return null;
+    }
+
+    /**
+     * Restore the value.
+     *
+     * @param $value
+     * @return Carbon
+     */
+    public function restore($value)
+    {
+        if (!$value) {
+            return null;
+        }
+
+        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value);
     }
 }

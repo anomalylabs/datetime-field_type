@@ -1,6 +1,7 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Carbon\Carbon;
 
 /**
  * Class DatetimeFieldType
@@ -51,6 +52,28 @@ class DatetimeFieldType extends FieldType
         'date'     => '0000-00-00',
         'time'     => '00:00:00'
     ];
+
+    /**
+     * Get the post value.
+     *
+     * @param null $default
+     * @return null|Carbon
+     */
+    public function getPostValue($default = null)
+    {
+        if (!$value = array_filter((array)parent::getPostValue($default))) {
+            return null;
+        }
+
+        if ($this->getColumnType() === 'datetime' && count($value) !== 2) {
+            return null;
+        }
+
+        return (new Carbon())->createFromFormat(
+            $this->getFormat(),
+            implode(' ', $value)
+        );
+    }
 
     /**
      * Get the column type.
@@ -137,5 +160,25 @@ class DatetimeFieldType extends FieldType
         }
 
         return implode(' ', $format);
+    }
+
+    /**
+     * Get the storage format.
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getStorageFormat()
+    {
+        switch ($this->getColumnType()) {
+            case 'datetime':
+                return 'Y-m-d H:i:s';
+            case 'date':
+                return 'Y-m-d';
+            case 'time':
+                return 'H:i:s';
+        }
+
+        throw new \Exception('Storage format can not be determined.');
     }
 }
