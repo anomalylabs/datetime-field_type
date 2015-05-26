@@ -34,25 +34,15 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
             return null;
         }
 
+        if ($value instanceof Carbon) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return new Carbon($value);
+        }
+
         return $value;
-
-        $mode = $this->fieldType->getColumnType();
-
-        $date = (new Carbon())->createFromFormat($this->fieldType->getFormat(), implode(' ', (array)$value));
-
-        if ($mode == 'datetime') {
-            return $date->toDateTimeString();
-        }
-
-        if ($mode == 'date') {
-            return $date->toDateString();
-        }
-
-        if ($mode == 'time') {
-            return $date->toTimeString();
-        }
-
-        return null;
     }
 
     /**
