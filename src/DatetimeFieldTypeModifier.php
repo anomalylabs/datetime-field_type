@@ -38,8 +38,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
             return $value;
         }
 
-        if (is_numeric($value)) {
+        if (is_int($value)) {
             return (new Carbon())->createFromTimestamp($value);
+        }
+
+        if (is_string($value)) {
+            return (new Carbon())->createFromTimestamp(strtotime($value));
         }
 
         return $value;

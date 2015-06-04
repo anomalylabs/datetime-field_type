@@ -39,7 +39,7 @@ class DatetimeFieldType extends FieldType
         'date_format' => 'j F, Y|d MM, yy',
         'year_range'  => '-50:+50',
         'time_format' => 'g:i A',
-        'step'        => 15,
+        'step'        => 1,
     ];
 
     /**
