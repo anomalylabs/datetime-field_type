@@ -61,6 +61,10 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
             return null;
         }
 
+        if (is_string($value)) {
+            return (new Carbon())->createFromTimestamp(strtotime($value));
+        }
+
         return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value);
     }
 }
