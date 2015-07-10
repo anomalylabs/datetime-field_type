@@ -1,5 +1,8 @@
+
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery-ui.datepicker.min.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.timepicker.min.js") }}
+{{ asset_add("styles.css", "anomaly.field_type.datetime::less/datepicker.less") }}
+{{ asset_add("styles.css", "anomaly.field_type.datetime::less/timepicker.less") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
 
 <div class="input-group">
@@ -13,6 +16,8 @@
         <input
                 type="text"
                 class="form-control datepicker"
+                data-min="{{ field_type.config.min }}"
+                data-max="{{ field_type.config.max }}"
                 name="{{ field_type.input_name }}[date]"
                 value="{{ field_type.format(field_type.getPhpDateFormat()) }}"
                 placeholder="{{ 'now'|date(field_type.getPhpDateFormat()) }}"

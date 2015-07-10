@@ -4,11 +4,9 @@ return [
     'mode'        => [
         'label'        => 'Input Mode',
         'instructions' => 'Do you want to display inputs for date, time, or both?',
-        'option'       => [
-            'date'     => 'Date',
-            'time'     => 'Time',
-            'datetime' => 'Date & Time'
-        ]
+        'datetime'     => 'Date + Time',
+        'date'         => 'Date',
+        'time'         => 'Time'
     ],
     'date_format' => [
         'label'        => 'Date Format',
@@ -19,7 +17,17 @@ return [
         'instructions' => 'Select the format for the time input.'
     ],
     'step'        => [
-        'label'        => 'Time Interval',
-        'instructions' => 'Select the interval for the time input.'
+        'label'        => 'Minute Step',
+        'instructions' => 'Select the minute step for the time input options.'
+    ],
+    'min'         => [
+        'label'        => 'Minimum Date',
+        'instructions' => 'Enter the minimum date allowed in days offset from the date of input.',
+        'placeholder'  => '-30'
+    ],
+    'max'         => [
+        'label'        => 'Maximum Date',
+        'instructions' => 'Enter the maximum date allowed in days offset from the date of input.',
+        'placeholder'  => '45'
     ]
 ];

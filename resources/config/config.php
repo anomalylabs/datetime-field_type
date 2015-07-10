@@ -2,18 +2,20 @@
 
 return [
     'mode'        => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
             'options' => [
-                'date'     => 'anomaly.field_type.datetime::config.mode.option.date',
-                'time'     => 'anomaly.field_type.datetime::config.mode.option.time',
-                'datetime' => 'anomaly.field_type.datetime::config.mode.option.datetime'
+                'datetime' => 'anomaly.field_type.datetime::config.mode.datetime',
+                'date'     => 'anomaly.field_type.datetime::config.mode.date',
+                'time'     => 'anomaly.field_type.datetime::config.mode.time'
             ]
         ]
     ],
     'date_format' => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
             'options' => [
                 'l, F j, Y|DD, d MM, yy' => function () {
                     return date('l, F j, Y'); // Friday, 10 July, 2015
@@ -34,8 +36,9 @@ return [
         ]
     ],
     'time_format' => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
             'options' => [
                 'g:i A' => function () {
                     return date('g:00 A'); // 4:00 PM
@@ -47,9 +50,23 @@ return [
         ]
     ],
     'step'        => [
+        'type'     => 'anomaly.field_type.integer',
+        'required' => true,
+        'config'   => [
+            'default_value' => 15,
+            'min'           => 1
+        ]
+    ],
+    'min'         => [
         'type'   => 'anomaly.field_type.integer',
         'config' => [
-            'min' => 1
+            'min' => false
+        ]
+    ],
+    'max'         => [
+        'type'   => 'anomaly.field_type.integer',
+        'config' => [
+            'min' => false
         ]
     ]
 ];
