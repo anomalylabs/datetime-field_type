@@ -1,4 +1,3 @@
-
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery-ui.datepicker.min.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.timepicker.min.js") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::less/datepicker.less") }}
@@ -36,9 +35,9 @@
                 type="text"
                 class="form-control timepicker"
                 name="{{ field_type.input_name }}[time]"
-                value="{{ field_type.format(field_type.config.time_format) }}"
-                placeholder="{{ 'now'|date(field_type.config.time_format) }}"
-                data-time-format="{{ field_type.getTimeFormat() }}"
+                value="{{ field_type.format(field_type.getPhpTimeFormat()) }}"
+                placeholder="{{ 'now'|date(field_type.getPhpTimeFormat()) }}"
+                data-time-format="{{ field_type.getPluginTimeFormat() }}"
                 data-step="{{ field_type.config.step }}">
 
     {% endif %}

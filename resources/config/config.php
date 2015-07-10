@@ -4,6 +4,7 @@ return [
     'mode'        => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
+        'disabled' => 'edit',
         'config'   => [
             'options' => [
                 'datetime' => 'anomaly.field_type.datetime::config.mode.datetime',
@@ -17,8 +18,8 @@ return [
         'required' => true,
         'config'   => [
             'options' => [
-                'l, F j, Y|DD, d MM, yy' => function () {
-                    return date('l, F j, Y'); // Friday, 10 July, 2015
+                'l, j F, Y|DD, d MM, yy' => function () {
+                    return date('l, j F, Y'); // Friday, 10 July, 2015
                 },
                 'j F, Y|d MM, yy'        => function () {
                     return date('j F, Y'); // 10 July, 2015
@@ -40,10 +41,10 @@ return [
         'required' => true,
         'config'   => [
             'options' => [
-                'g:i A' => function () {
+                'g:i A|h:i A' => function () {
                     return date('g:00 A'); // 4:00 PM
                 },
-                'G:i A' => function () {
+                'G:i|H:i'     => function () {
                     return date('G:00'); // 16:00
                 }
             ]
