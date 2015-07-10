@@ -17,7 +17,17 @@ return [
         'instructions' => 'Select the format for the time input.'
     ],
     'step'        => [
-        'label'        => 'Time Interval',
-        'instructions' => 'Select the minute interval for the time input.'
+        'label'        => 'Minute Step',
+        'instructions' => 'Select the minute step for the time input options.'
+    ],
+    'min'         => [
+        'label'        => 'Minimum Date',
+        'instructions' => 'Enter the minimum date allowed in days offset from the date of input.',
+        'placeholder'  => '-30'
+    ],
+    'max'         => [
+        'label'        => 'Maximum Date',
+        'instructions' => 'Enter the maximum date allowed in days offset from the date of input.',
+        'placeholder'  => '45'
     ]
 ];

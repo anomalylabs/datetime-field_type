@@ -13,6 +13,8 @@
         <input
                 type="text"
                 class="form-control datepicker"
+                data-min="{{ field_type.config.min }}"
+                data-max="{{ field_type.config.max }}"
                 name="{{ field_type.input_name }}[date]"
                 value="{{ field_type.format(field_type.getPhpDateFormat()) }}"
                 placeholder="{{ 'now'|date(field_type.getPhpDateFormat()) }}"

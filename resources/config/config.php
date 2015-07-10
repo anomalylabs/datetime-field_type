@@ -41,5 +41,17 @@ return [
             'default_value' => 15,
             'min'           => 1
         ]
+    ],
+    'min'         => [
+        'type'   => 'anomaly.field_type.integer',
+        'config' => [
+            'min' => false
+        ]
+    ],
+    'max'         => [
+        'type'   => 'anomaly.field_type.integer',
+        'config' => [
+            'min' => false
+        ]
     ]
 ];

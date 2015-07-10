@@ -5,6 +5,9 @@ $(function () {
         $(this).datepicker({
             dateFormat: $(this).data('date-format'),
             yearRange: $(this).data('year-range'),
+            minDate: $(this).data('min'),
+            maxDate: $(this).data('max'),
+            selectOtherMonths: true,
             showOtherMonths: true,
             changeMonth: true,
             changeYear: true
