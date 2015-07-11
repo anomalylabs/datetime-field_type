@@ -25,5 +25,10 @@
         "psr-4": {
             "Anomaly\\DatetimeFieldType\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.0/master": "1.0.x-dev"
+        }
     }
 }
