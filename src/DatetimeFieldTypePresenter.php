@@ -32,7 +32,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     {
         $value = $this->object->getValue();
 
-        if ($value && $value instanceof Carbon) {
+        if ($value instanceof Carbon) {
             return $value->format($format);
         }
 

@@ -1,5 +1,6 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
+use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Carbon\Carbon;
 
@@ -54,6 +55,45 @@ class DatetimeFieldType extends FieldType
     ];
 
     /**
+     * The converter utility.
+     *
+     * @var DatetimeConverter
+     */
+    protected $converter;
+
+    /**
+     * Create a new DatetimeFieldType instance.
+     *
+     * @param DatetimeConverter $converter
+     */
+    public function __construct(DatetimeConverter $converter)
+    {
+        $this->converter = $converter;
+    }
+
+    /**
+     * Get the rules.
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+        $rules = parent::getRules();
+
+        // We expect an array.
+        $rules[] = 'array';
+
+        // 2 parts for datetime and 1 part for date / time.
+        if (array_get($this->getConfig(), 'mode') === 'datetime') {
+            $rules[] = 'size:2';
+        } else {
+            $rules[] = 'size:1';
+        }
+
+        return $rules;
+    }
+
+    /**
      * Get the post value.
      *
      * @param null $default
@@ -61,19 +101,23 @@ class DatetimeFieldType extends FieldType
      */
     public function getPostValue($default = null)
     {
-        if (!$value = array_filter((array)parent::getPostValue($default))) {
-            return null;
-        }
-
-        if ($this->getColumnType() === 'datetime' && count($value) !== 2) {
-            return null;
-        }
-
         return (new Carbon())->createFromFormat(
-            $this->getFormat(),
-            implode(' ', $value)
+            $this->getPostFormat(),
+            implode(' ', parent::getPostValue($default))
         );
     }
+
+    /**
+     * Return the validation value.
+     *
+     * @param null $default
+     * @return mixed
+     */
+    public function getValidationValue($default = null)
+    {
+        return parent::getPostValue($default);
+    }
+
 
     /**
      * Get the column type.
@@ -96,95 +140,32 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Get the date format for PHP / plugin.
+     * Get the date format
+     * for the plugin.
      *
      * @return array
-     */
-    protected function getDateFormat()
-    {
-        $formats = explode('|', $this->config['date_format']);
-
-        $php    = $formats[0];
-        $plugin = $formats[1];
-
-        return compact('php', 'plugin');
-    }
-
-    /**
-     * Get the time format for PHP / plugin.
-     *
-     * @return array
-     */
-    protected function getTimeFormat()
-    {
-        $formats = explode('|', $this->config['time_format']);
-
-        $php    = $formats[0];
-        $plugin = $formats[1];
-
-        return compact('php', 'plugin');
-    }
-
-    /**
-     * Get the PHP date format.
-     *
-     * @return string
-     */
-    public function getPhpDateFormat()
-    {
-        return $this->getDateFormat()['php'];
-    }
-
-    /**
-     * Get the plugin date format.
-     *
-     * @return string
      */
     public function getPluginDateFormat()
     {
-        return $this->getDateFormat()['plugin'];
+        return $this->converter->toJs(array_get($this->getConfig(), 'date_format'));
     }
 
     /**
-     * Get the PHP time format.
+     * Get the post format.
      *
      * @return string
      */
-    public function getPhpTimeFormat()
+    protected function getPostFormat()
     {
-        return $this->getTimeFormat()['php'];
-    }
+        $mode = array_get($this->getConfig(), 'mode');
+        $date = array_get($this->getConfig(), 'date_format');
+        $time = array_get($this->getConfig(), 'time_format');
 
-    /**
-     * Get the plugin time format.
-     *
-     * @return string
-     */
-    public function getPluginTimeFormat()
-    {
-        return $this->getTimeFormat()['plugin'];
-    }
-
-    /**
-     * Get the format.
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        $format = [];
-
-        $mode = array_get($this->config, 'mode');
-
-        if (in_array($mode, ['date', 'datetime'])) {
-            $format[] = $this->getPhpDateFormat();
+        if ($mode === 'datetime') {
+            return $date . ' ' . $time;
         }
 
-        if (in_array($mode, ['time', 'datetime'])) {
-            $format[] = $this->getPhpTimeFormat();
-        }
-
-        return implode(' ', $format);
+        return $mode === 'date' ? $date : $time;
     }
 
     /**

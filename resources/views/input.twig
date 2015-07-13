@@ -18,9 +18,9 @@
                 data-min="{{ field_type.config.min }}"
                 data-max="{{ field_type.config.max }}"
                 name="{{ field_type.input_name }}[date]"
-                value="{{ field_type.format(field_type.getPhpDateFormat()) }}"
-                placeholder="{{ 'now'|date(field_type.getPhpDateFormat()) }}"
-                data-date-format="{{ field_type.getPluginDateFormat() }}">
+                value="{{ field_type.format(field_type.config.date_format) }}"
+                placeholder="{{ 'now'|date(field_type.config.date_format) }}"
+                data-date-format="{{ field_type.plugin_date_format }}">
 
     {% endif %}
 
@@ -35,9 +35,9 @@
                 type="text"
                 class="form-control timepicker"
                 name="{{ field_type.input_name }}[time]"
-                value="{{ field_type.format(field_type.getPhpTimeFormat()) }}"
-                placeholder="{{ 'now'|date(field_type.getPhpTimeFormat()) }}"
-                data-time-format="{{ field_type.getPluginTimeFormat() }}"
+                value="{{ field_type.format(field_type.config.time_format) }}"
+                placeholder="{{ 'now'|date(field_type.config.time_format) }}"
+                data-time-format="{{ field_type.config.time_format }}"
                 data-step="{{ field_type.config.step }}">
 
     {% endif %}

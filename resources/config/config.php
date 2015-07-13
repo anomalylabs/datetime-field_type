@@ -18,19 +18,19 @@ return [
         'required' => true,
         'config'   => [
             'options' => [
-                'l, j F, Y|DD, d MM, yy' => function () {
+                'l, j F, Y' => function () {
                     return date('l, j F, Y'); // Friday, 10 July, 2015
                 },
-                'j F, Y|d MM, yy'        => function () {
+                'j F, Y'    => function () {
                     return date('j F, Y'); // 10 July, 2015
                 },
-                'j M, y|d M, y'          => function () {
+                'j M, y'    => function () {
                     return date('j M, y'); // 10 Jul, 15
                 },
-                'm/d/Y|mm/dd/yy'         => function () {
+                'm/d/Y'     => function () {
                     return date('m/d/Y'); // 07/10/2015
                 },
-                'Y-m-d|mm/dd/yy'         => function () {
+                'Y-m-d'     => function () {
                     return date('Y-m-d'); // 2015-07-10
                 }
             ]
@@ -41,10 +41,10 @@ return [
         'required' => true,
         'config'   => [
             'options' => [
-                'g:i A|h:i A' => function () {
+                'g:i A' => function () {
                     return date('g:00 A'); // 4:00 PM
                 },
-                'G:i|H:i'     => function () {
+                'G:i'   => function () {
                     return date('G:00'); // 16:00
                 }
             ]
