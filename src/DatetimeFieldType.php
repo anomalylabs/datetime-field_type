@@ -119,8 +119,12 @@ class DatetimeFieldType extends FieldType
     {
         $formats = explode('|', $this->config['time_format']);
 
-        $php    = $formats[0];
-        $plugin = $formats[1];
+        $php = $formats[0];
+        if (count($formats) > 1) {
+            $plugin = $formats[1];
+        } else {
+            $plugin = $php;
+        }
 
         return compact('php', 'plugin');
     }
