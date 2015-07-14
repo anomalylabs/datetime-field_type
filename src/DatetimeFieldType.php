@@ -44,17 +44,6 @@ class DatetimeFieldType extends FieldType
     ];
 
     /**
-     * Zero formats.
-     *
-     * @var array
-     */
-    protected $zeros = [
-        'datetime' => '0000-00-00 00:00:00',
-        'date'     => '0000-00-00',
-        'time'     => '00:00:00'
-    ];
-
-    /**
      * The converter utility.
      *
      * @var DatetimeConverter
@@ -127,16 +116,6 @@ class DatetimeFieldType extends FieldType
     public function getColumnType()
     {
         return array_get($this->config, 'mode');
-    }
-
-    /**
-     * Get the zero format.
-     *
-     * @return string
-     */
-    public function getZero()
-    {
-        return array_get($this->zeros, $this->getColumnType());
     }
 
     /**
