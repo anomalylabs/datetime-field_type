@@ -37,9 +37,9 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
-        'date_format' => 'j F, Y|d MM, yy',
+        'date_format' => 'j F, Y',
         'year_range'  => '-50:+50',
-        'time_format' => 'g:i A',
+        'time_format' => 'h:i A',
         'step'        => 15
     ];
 
