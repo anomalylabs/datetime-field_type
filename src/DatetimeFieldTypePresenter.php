@@ -38,4 +38,21 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
         return null;
     }
+
+    /**
+     * Format the value in user format.
+     *
+     * @param null $format
+     * @return null|string
+     */
+    public function local($format = 'm/d/Y')
+    {
+        $value = $this->object->getValue();
+
+        if ($value instanceof Carbon) {
+            return $value->setTimezone(config('app.locale'))->format($format);
+        }
+
+        return null;
+    }
 }

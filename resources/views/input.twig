@@ -41,7 +41,12 @@
                 data-step="{{ field_type.config.step }}">
 
         <span class="input-group-addon">
-            {{ config_get('app.timezone') }}
+            {{ field_type.config.timezone }}
+
+            <input
+                    type="hidden"
+                    name="{{ field_type.input_name }}[timezone]"
+                    value="{{ field_type.config.timezone }}">
         </span>
 
     {% endif %}

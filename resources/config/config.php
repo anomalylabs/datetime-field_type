@@ -50,6 +50,27 @@ return [
             ]
         ]
     ],
+    'timezone'    => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
+            'default_value' => 'default',
+            'top_options'   => [
+                'default',
+                'user',
+                'UTC'
+            ],
+            'options'       => function () {
+
+                $timezones = [
+                        'default' => trans('anomaly.field_type.datetime::config.timezone.default'),
+                        'user'    => trans('anomaly.field_type.datetime::config.timezone.user')
+                    ] + array_combine(timezone_identifiers_list(), timezone_identifiers_list());
+
+                return $timezones;
+            }
+        ],
+    ],
     'step'        => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,

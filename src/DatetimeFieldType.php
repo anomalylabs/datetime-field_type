@@ -38,6 +38,7 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
+        'timezone'    => 'default',
         'date_format' => 'j F, Y',
         'year_range'  => '-50:+50',
         'time_format' => 'g:i A',
@@ -71,6 +72,28 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
+     * Get the config.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        $config = parent::getConfig();
+
+        // Use the user default / standard timezone.
+        if (array_get($config, 'timezone') === 'default') {
+            array_set($config, 'timezone', $this->configuration->get('streams::datetime.default_timezone'));
+        }
+
+        // Use the user specified timezone.
+        if (array_get($config, 'timezone') === 'user') {
+            array_set($config, 'timezone', $this->configuration->get('app.timezone'));
+        }
+
+        return $config;
+    }
+
+    /**
      * Get the rules.
      *
      * @return array
@@ -82,11 +105,17 @@ class DatetimeFieldType extends FieldType
         // We expect an array.
         $rules[] = 'array';
 
-        // 2 parts for datetime and 1 part for date / time.
-        if (array_get($this->getConfig(), 'mode') === 'datetime') {
-            $rules[] = 'size:2';
-        } else {
-            $rules[] = 'size:1';
+        // Set amount of inputs to expect.
+        switch (array_get($this->getConfig(), 'mode')) {
+            case 'datetime':
+                $rules[] = 'size:3';
+                break;
+            case 'time':
+                $rules[] = 'size:2';
+                break;
+            case 'date':
+                $rules[] = 'size:1';
+                break;
         }
 
         return $rules;
@@ -152,10 +181,10 @@ class DatetimeFieldType extends FieldType
         $time = array_get($this->getConfig(), 'time_format');
 
         if ($mode === 'datetime') {
-            return $date . ' ' . $time;
+            return $date . ' ' . $time . ' e';
         }
 
-        return $mode === 'date' ? $date : $time;
+        return $mode === 'date' ? $date : $time . ' e';
     }
 
     /**
