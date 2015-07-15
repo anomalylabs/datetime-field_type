@@ -3,6 +3,7 @@
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Carbon\Carbon;
+use Illuminate\Config\Repository;
 
 /**
  * Class DatetimeFieldType
@@ -44,6 +45,13 @@ class DatetimeFieldType extends FieldType
     ];
 
     /**
+     * The configuration repository.
+     *
+     * @var Repository
+     */
+    protected $configuration;
+
+    /**
      * The converter utility.
      *
      * @var DatetimeConverter
@@ -54,10 +62,12 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
+     * @param Repository        $configuration
      */
-    public function __construct(DatetimeConverter $converter)
+    public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
-        $this->converter = $converter;
+        $this->converter     = $converter;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -92,7 +102,8 @@ class DatetimeFieldType extends FieldType
     {
         return (new Carbon())->createFromFormat(
             $this->getPostFormat(),
-            implode(' ', parent::getPostValue($default))
+            implode(' ', parent::getPostValue($default)),
+            $this->configuration->get('app.timezone')
         );
     }
 

@@ -40,6 +40,10 @@
                 data-time-format="{{ field_type.config.time_format }}"
                 data-step="{{ field_type.config.step }}">
 
+        <span class="input-group-addon">
+            {{ config_get('app.timezone') }}
+        </span>
+
     {% endif %}
 
 </div>
