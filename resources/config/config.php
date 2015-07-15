@@ -44,8 +44,8 @@ return [
                 'g:i A' => function () {
                     return date('g:00 A'); // 4:00 PM
                 },
-                'G:i'   => function () {
-                    return date('G:00'); // 16:00
+                'H:i'   => function () {
+                    return date('H:00'); // 16:00
                 }
             ]
         ]
