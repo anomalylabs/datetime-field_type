@@ -129,6 +129,10 @@ class DatetimeFieldType extends FieldType
      */
     public function getPostValue($default = null)
     {
+        if (!array_filter(array_except(parent::getPostValue($default), ['timezone']))) {
+            return null;
+        }
+        
         return (new Carbon())->createFromFormat(
             $this->getPostFormat(),
             implode(' ', parent::getPostValue($default)),
