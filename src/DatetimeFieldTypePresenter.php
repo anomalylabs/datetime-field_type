@@ -50,7 +50,23 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         $value = $this->object->getValue();
 
         if ($value instanceof Carbon) {
-            return $value->setTimezone(config('app.locale'))->format($format);
+            return $value->setTimezone(config('app.timezone'))->format($format);
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the "time ago" formatted string.
+     *
+     * @return null|string
+     */
+    public function timeAgo()
+    {
+        $value = $this->object->getValue();
+
+        if ($value instanceof Carbon) {
+            return $value->setTimezone(config('app.timezone'))->diffForHumans();
         }
 
         return null;
