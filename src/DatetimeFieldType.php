@@ -132,7 +132,7 @@ class DatetimeFieldType extends FieldType
         if (!array_filter(array_except(parent::getPostValue($default), ['timezone']))) {
             return null;
         }
-        
+
         return (new Carbon())->createFromFormat(
             $this->getPostFormat(),
             implode(' ', parent::getPostValue($default)),
@@ -209,5 +209,25 @@ class DatetimeFieldType extends FieldType
         }
 
         throw new \Exception('Storage format can not be determined.');
+    }
+
+    /**
+     * Get the output format.
+     *
+     * @return string
+     */
+    public function getOutputFormat()
+    {
+        switch ($this->getColumnType()) {
+            case 'datetime':
+                return array_get($this->getConfig(), 'date_format') . ' ' . array_get(
+                    $this->getConfig(),
+                    'time_format'
+                );
+            case 'date':
+                return array_get($this->getConfig(), 'date_format');
+            case 'time':
+                return array_get($this->getConfig(), 'time_format');
+        }
     }
 }

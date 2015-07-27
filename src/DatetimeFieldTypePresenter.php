@@ -28,9 +28,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      * @param null $format
      * @return null|string
      */
-    public function format($format = 'm/d/Y')
+    public function format($format = null)
     {
         $value = $this->object->getValue();
+
+        if (!$format) {
+            $format = $this->object->getOutputFormat();
+        }
 
         if ($value instanceof Carbon) {
             return $value->format($format);
@@ -45,9 +49,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      * @param null $format
      * @return null|string
      */
-    public function local($format = 'm/d/Y')
+    public function local($format = null)
     {
         $value = $this->object->getValue();
+
+        if (!$format) {
+            $format = $this->object->getOutputFormat();
+        }
 
         if ($value instanceof Carbon) {
             return $value->setTimezone(config('app.timezone'))->format($format);
