@@ -18,7 +18,7 @@ $entry->example->format('y-m-d'); or $entry->example->format;
 
 `format` - The desired output format. If none is provided the format from the field configuration will be used. 
 
-The local method returns the date/time value in the provided optional format in the users specified timezone.
+The local method returns the date/time value in the provided optional format in the **users specified timezone**.
 
 ```
 // Twig usage
