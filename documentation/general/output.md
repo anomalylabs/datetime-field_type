@@ -12,7 +12,7 @@ The format method returns the date/time value in the provided optional format.
 // Twig usage
 {{ entry.example.format('y-m-d') }} or {{ entry.example.format }}
 
-// API Usage
+// API usage
 $entry->example->format('y-m-d'); or $entry->example->format;
 ```
 
@@ -26,6 +26,6 @@ The local method returns the date/time value in the provided optional format in 
 // Twig usage
 {{ entry.example.local('y-m-d') }} or {{ entry.example.local }}
 
-// API Usage
+// API usage
 $entry->example->local('y-m-d'); or $entry->example->local;
 ```
