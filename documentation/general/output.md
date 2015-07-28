@@ -1,5 +1,7 @@
 # Output
 
+This field type returns a Carbon instance in the configured timezone by default.
+
 ### Format
 
 `format` - The desired output format. If none is provided the format from the field configuration will be used. 
