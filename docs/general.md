@@ -96,3 +96,16 @@ Returns the date/time value in the provided optional format in the **user's spec
     
     // API usage
     $entry->example->local('y-m-d'); or $entry->example->local;
+
+### `iso()`
+
+Returns the date/time value in the ISO format. Great for the HTML5 datetime elment.
+
+    // Twig usage
+    {{ entry.example.iso }}
+    
+    // HTML5 usage
+    <time datetime="{{ entry.example.iso }}">{{ entry.example.local }}</time>
+    
+    // API usage
+    $entry->example->iso
