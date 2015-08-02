@@ -79,4 +79,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
         return null;
     }
+
+    /**
+     * Return the ISO formatted datetime.
+     * @return null|string
+     */
+    public function iso()
+    {
+        return $this->format('c');
+    }
 }
