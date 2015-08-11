@@ -88,4 +88,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     {
         return $this->format('c');
     }
+
+    /**
+     * Return the RFC formatted datetime.
+     * @return null|string
+     */
+    public function rfc()
+    {
+        return $this->format('r');
+    }
 }

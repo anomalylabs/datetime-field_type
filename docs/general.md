@@ -99,7 +99,7 @@ Returns the date/time value in the provided optional format in the **user's spec
 
 ### `iso()`
 
-Returns the date/time value in the ISO format. Great for the HTML5 datetime elment.
+Returns the date/time value in the ISO 8601 format. Great for the HTML5 datetime element.
 
     // Twig usage
     {{ entry.example.iso }}
@@ -109,3 +109,13 @@ Returns the date/time value in the ISO format. Great for the HTML5 datetime elme
     
     // API usage
     $entry->example->iso
+
+### `rfc()`
+
+Returns the date/time value in the RFC 2822 format. Great for the RSS feeds.
+
+    // Twig usage
+    {{ entry.example.rfc }}
+    
+    // API usage
+    $entry->example->rfc
