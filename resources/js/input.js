@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize date pickers
-    $('.datetime-field-type .datepicker').each(function () {
+    $('.datetime-field_type .datepicker').each(function () {
         $(this).datepicker({
             dateFormat: $(this).data('date-format'),
             yearRange: $(this).data('year-range'),
@@ -15,7 +15,7 @@ $(function () {
     });
 
     // Initialize time pickers
-    $('.datetime-field-type .timepicker').each(function () {
+    $('.datetime-field_type .timepicker').each(function () {
         $(this).timepicker({
             timeFormat: $(this).data('time-format'),
             step: $(this).data('step'),
