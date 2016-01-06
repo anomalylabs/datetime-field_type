@@ -30,26 +30,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function modify($value)
     {
-        if (!$value) {
+        if (!$value = $this->toCarbon($value, $this->fieldType->config('timezone'))) {
             return null;
         }
 
-        if ($value instanceof Carbon) {
-            return $value->setTimezone('UTC');
-        }
-
-        if (is_int($value)) {
-            return (new Carbon())->createFromTimestamp(
-                $value,
-                array_get($this->fieldType->getConfig(), 'timezone')
-            )->setTimezone('UTC');
-        }
-
-        if (is_string($value)) {
-            return (new Carbon())->createFromTimestamp(
-                strtotime($value),
-                array_get($this->fieldType->getConfig(), 'timezone')
-            )->setTimezone('UTC');
+        if ($this->fieldType->config('mode') !== 'date') {
+            $value->setTimezone('UTC');
         }
 
         return $value;
@@ -78,11 +64,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      * Return a carbon instance
      * based on the value.
      *
-     * @param $value
-     * @return null|Carbon
+     * @param      $value
+     * @param null $timezone
+     * @return Carbon|null
      * @throws \Exception
      */
-    protected function toCarbon($value)
+    protected function toCarbon($value, $timezone = null)
     {
         if (!$value) {
             return null;
@@ -93,9 +80,9 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if (is_numeric($value)) {
-            return (new Carbon())->createFromTimestamp($value);
+            return (new Carbon())->createFromTimestamp($value, $timezone);
         }
 
-        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value);
+        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value, $timezone);
     }
 }
