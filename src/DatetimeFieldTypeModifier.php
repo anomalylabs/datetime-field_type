@@ -68,17 +68,20 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($value instanceof Carbon) {
-            return $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
+            return $value/*->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'))*/
+                ;
         }
 
-        if (is_string($value)) {
-            return (new Carbon())->createFromTimestamp(strtotime($value))->setTimezone(
+        if (is_numeric($value)) {
+            return (new Carbon())->createFromTimestamp($value)/*->setTimezone(
                 array_get($this->fieldType->getConfig(), 'timezone')
-            );
+            )*/
+                ;
         }
 
-        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value)->setTimezone(
+        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value)/*->setTimezone(
             array_get($this->fieldType->getConfig(), 'timezone')
-        );
+        )*/
+            ;
     }
 }
