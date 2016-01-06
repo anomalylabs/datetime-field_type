@@ -63,25 +63,39 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function restore($value)
     {
+        if (!$value = $this->toCarbon($value)) {
+            return null;
+        }
+
+        if ($this->fieldType->config('mode') !== 'date') {
+            $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
+        }
+
+        return $value;
+    }
+
+    /**
+     * Return a carbon instance
+     * based on the value.
+     *
+     * @param $value
+     * @return null|Carbon
+     * @throws \Exception
+     */
+    protected function toCarbon($value)
+    {
         if (!$value) {
             return null;
         }
 
         if ($value instanceof Carbon) {
-            return $value/*->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'))*/
-                ;
+            return $value;
         }
 
         if (is_numeric($value)) {
-            return (new Carbon())->createFromTimestamp($value)/*->setTimezone(
-                array_get($this->fieldType->getConfig(), 'timezone')
-            )*/
-                ;
+            return (new Carbon())->createFromTimestamp($value);
         }
 
-        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value)/*->setTimezone(
-            array_get($this->fieldType->getConfig(), 'timezone')
-        )*/
-            ;
+        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value);
     }
 }
