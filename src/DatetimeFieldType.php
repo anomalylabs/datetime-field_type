@@ -80,14 +80,16 @@ class DatetimeFieldType extends FieldType
     {
         $config = parent::getConfig();
 
-        // Use the user default / standard timezone.
-        if (array_get($config, 'timezone') === 'default') {
-            array_set($config, 'timezone', $this->configuration->get('streams::datetime.default_timezone'));
-        }
+        $timezones = array_map(
+            function ($timezone) {
+                return strtolower($timezone);
+            },
+            timezone_identifiers_list()
+        );
 
-        // Use the user specified timezone.
-        if (array_get($config, 'timezone') === 'user') {
-            array_set($config, 'timezone', $this->configuration->get('app.timezone'));
+        // Check for default / erroneous timezone.
+        if (!in_array(array_get($config, 'timezone'), $timezones)) {
+            $config['timezone'] = $this->configuration->get('app.timezone');
         }
 
         return $config;

@@ -82,6 +82,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
     /**
      * Return the ISO formatted datetime.
+     *
      * @return null|string
      */
     public function iso()
@@ -91,6 +92,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
     /**
      * Return the RFC formatted datetime.
+     *
      * @return null|string
      */
     public function rfc()
