@@ -16,12 +16,6 @@ return [
         'label'        => 'Time Format',
         'instructions' => 'Select the format for the time input.'
     ],
-    'timezone'    => [
-        'label'        => 'Timezone',
-        'instructions' => 'Select the contextual timezone for the input.',
-        'default'      => 'Default Timezone',
-        'user'         => 'User Timezone'
-    ],
     'step'        => [
         'label'        => 'Minute Step',
         'instructions' => 'Select the minute step for the time input options.'
