@@ -44,6 +44,36 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Format the date.
+     *
+     * @param null $format
+     * @return null|string
+     */
+    public function date($format = null)
+    {
+        if (!$format) {
+            $format = $this->object->getOutputFormat('date');
+        }
+
+        return $this->format($format);
+    }
+
+    /**
+     * Format the time.
+     *
+     * @param null $format
+     * @return null|string
+     */
+    public function time($format = null)
+    {
+        if (!$format) {
+            $format = $this->object->getOutputFormat('time');
+        }
+
+        return $this->format($format);
+    }
+
+    /**
      * Format the value in user format.
      *
      * @param null $format

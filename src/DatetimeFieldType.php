@@ -216,11 +216,12 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the output format.
      *
+     * @param null $output
      * @return string
      */
-    public function getOutputFormat()
+    public function getOutputFormat($output = null)
     {
-        switch ($this->getColumnType()) {
+        switch ($output ?: $this->getColumnType()) {
             case 'datetime':
                 return array_get($this->getConfig(), 'date_format') . ' ' . array_get(
                     $this->getConfig(),
