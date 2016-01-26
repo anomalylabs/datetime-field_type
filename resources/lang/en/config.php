@@ -16,6 +16,11 @@ return [
         'label'        => 'Time Format',
         'instructions' => 'Select the format for the time input.'
     ],
+    'timezone'    => [
+        'label'        => 'Timezone',
+        'instructions' => 'Select the timezone for the input.',
+        'placeholder'  => 'Default Timezone'
+    ],
     'step'        => [
         'label'        => 'Minute Step',
         'instructions' => 'Select the minute step for the time input options.'

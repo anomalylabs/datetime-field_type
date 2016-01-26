@@ -50,6 +50,12 @@ return [
             ]
         ]
     ],
+    'timezone'    => [
+        'type'   => 'anomaly.field_type.select',
+        'config' => [
+            'handler' => 'timezones'
+        ]
+    ],
     'step'        => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,

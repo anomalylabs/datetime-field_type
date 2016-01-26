@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Carbon\Carbon;
+use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class DatetimeFieldTypeModifier
@@ -23,6 +24,25 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
     protected $fieldType;
 
     /**
+     * The config repository.
+     *
+     * @var Repository
+     */
+    protected $config;
+
+    /**
+     * Create a new DatetimeFieldTypeModifier instance.
+     *
+     * @param Repository        $config
+     * @param DatetimeFieldType $fieldType
+     */
+    public function __construct(Repository $config, DatetimeFieldType $fieldType)
+    {
+        $this->config    = $config;
+        $this->fieldType = $fieldType;
+    }
+
+    /**
      * Modify the value.
      *
      * @param $value
@@ -35,7 +55,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone('UTC');
+            $value->setTimezone($this->config->get('app.timezone'));
         }
 
         return $value;
