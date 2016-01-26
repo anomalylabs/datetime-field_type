@@ -88,7 +88,7 @@ class DatetimeFieldType extends FieldType
         );
 
         // Check for default / erroneous timezone.
-        if (($timezone = array_get($config, 'timezone')) && !in_array($timezone, $timezones)) {
+        if (($timezone = strtolower(array_get($config, 'timezone'))) && !in_array($timezone, $timezones)) {
             $config['timezone'] = $this->configuration->get(
                 'streams::datetime.default_timezone',
                 $this->configuration->get('app.timezone')
