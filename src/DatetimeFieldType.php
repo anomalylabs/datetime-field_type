@@ -140,7 +140,7 @@ class DatetimeFieldType extends FieldType
 
         return (new Carbon())->createFromFormat(
             $this->getPostFormat(),
-            implode(' ', parent::getPostValue($default)),
+            trim(implode(' ', parent::getPostValue($default))),
             $this->configuration->get('app.timezone')
         );
     }
@@ -190,10 +190,10 @@ class DatetimeFieldType extends FieldType
         $time = array_get($this->getConfig(), 'time_format');
 
         if ($mode === 'datetime') {
-            return $date . ' ' . $time . ' e';
+            return $date . ' ' . $time;
         }
 
-        return $mode === 'date' ? $date : $time . ' e';
+        return $mode === 'date' ? $date : $time;
     }
 
     /**
