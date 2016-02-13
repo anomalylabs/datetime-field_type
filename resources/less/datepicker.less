@@ -6,13 +6,13 @@
     background-color: #ffffff;
     display: none;
     margin: 10px 0 0 0;
-    border: 7px solid @secondary;
+    border: 7px solid @brand-primary;
     border-radius: 5px;
     z-index: 101 !important;
 
     // Navigation pad
     .ui-datepicker-header {
-        background-color: @secondary;
+        background-color: @brand-primary;
         color: #ffffff;
         cursor: default;
         margin: -7px -6px 2px;
@@ -30,10 +30,10 @@
         cursor: pointer;
 
         &:hover {
-            background-color: mix(@secondary, white, 80%);
+            background-color: mix(@brand-primary, white, 80%);
         }
         &:active {
-            background-color: mix(@secondary, black, 85%);
+            background-color: mix(@brand-primary, black, 85%);
         }
         &.ui-state-disabled {
             background-color: transparent;
@@ -47,12 +47,12 @@
     }
     .ui-datepicker-prev {
         left: 0;
-        border-right: 2px solid mix(white, @secondary, 30%);
+        border-right: 2px solid mix(white, @brand-primary, 30%);
         border-radius: 5px 0 0 0;
     }
     .ui-datepicker-next {
         right: 0;
-        border-left: 2px solid mix(white, @secondary, 30%);
+        border-left: 2px solid mix(white, @brand-primary, 30%);
         border-radius: 0 5px 0 0;
     }
     .ui-datepicker-title {
@@ -131,7 +131,7 @@
         }
     }
     .ui-state-active {
-        background-color: @secondary;
+        background-color: @brand-primary;
         color: #ffffff;
     }
     .ui-datepicker-other-month a {
