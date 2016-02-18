@@ -20,7 +20,11 @@
                 name="{{ field_type.input_name }}[date]"
                 value="{{ field_type.format(field_type.config.date_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.date_format) }}"
-                data-date-format="{{ field_type.plugin_date_format }}">
+                data-date-format="{{ field_type.plugin_date_format }}"
+                {{ html_attributes(field_type.attributes) }}
+                {{ field_type.required ? 'required' }}
+                {{ field_type.disabled ? 'disabled' }}
+                {{ field_type.readonly ? 'readonly' }}>
 
     {% endif %}
 
@@ -38,7 +42,11 @@
                 value="{{ field_type.format(field_type.config.time_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.time_format) }}"
                 data-time-format="{{ field_type.config.time_format }}"
-                data-step="{{ field_type.config.step }}">
+                data-step="{{ field_type.config.step }}"
+                {{ html_attributes(field_type.attributes) }}
+                {{ field_type.required ? 'required' }}
+                {{ field_type.disabled ? 'disabled' }}
+                {{ field_type.readonly ? 'readonly' }}>
 
         <span class="input-group-addon">
             {{ field_type.config.timezone }}

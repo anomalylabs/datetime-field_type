@@ -1,10 +1,12 @@
 $(function () {
 
     // Initialize date pickers
-    $('.datetime-field_type .datepicker').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"].datepicker').each(function () {
 
-        $(this).prev('.icon').click(function() {
-            $(this).next('.datepicker').focus();
+        var input = $(this);
+
+        input.prev('.icon').click(function () {
+            input.focus();
         });
 
         $(this).datepicker({
@@ -20,10 +22,12 @@ $(function () {
     });
 
     // Initialize time pickers
-    $('.datetime-field_type .timepicker').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"].timepicker').each(function () {
 
-        $(this).prev('.icon').click(function() {
-            $(this).next('.timepicker').focus();
+        var input = $(this);
+
+        input.prev('.icon').click(function () {
+            input.focus();
         });
 
         $(this).timepicker({
