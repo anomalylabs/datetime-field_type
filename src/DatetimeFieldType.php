@@ -110,10 +110,10 @@ class DatetimeFieldType extends FieldType
         // Set amount of inputs to expect.
         switch (array_get($this->getConfig(), 'mode')) {
             case 'datetime':
-                $rules[] = 'size:3';
+                $rules[] = 'size:2';
                 break;
             case 'time':
-                $rules[] = 'size:2';
+                $rules[] = 'size:1';
                 break;
             case 'date':
                 $rules[] = 'size:1';
