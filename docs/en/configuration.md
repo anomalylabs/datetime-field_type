@@ -14,12 +14,12 @@ Below is the full configuration available with defaults.
             "type"   => "anomaly.field_type.country",
             "config" => [
                 "default_value" => null,
-                'mode'          => 'datetime',
-                'date_format'   => 'j F, Y',
-                'year_range'    => '-50:+50',
-                'time_format'   => 'g:i A',
-                'timezone'      => null,
-                'step'          => 15
+                "mode"          => "datetime",
+                "date_format"   => "j F, Y",
+                "year_range"    => "-50:+50",
+                "time_format"   => "g:i A",
+                "timezone"      => null,
+                "step"          => 15
             ]
         ]
     ];
