@@ -1,12 +1,22 @@
 {
-    "setup": {
+    "getting-started": {
         "title": {
-            "en": "General"
+            "en": "Getting Started"
         },
         "pages": {
-            "general": {
+            "introduction": {
                 "title": {
-                    "en": "General"
+                    "en": "Introduction"
+                }
+            },
+            "configuration": {
+                "title": {
+                    "en": "Configuration"
+                }
+            },
+            "usage": {
+                "title": {
+                    "en": "Usage"
                 }
             }
         }

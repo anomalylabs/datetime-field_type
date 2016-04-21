@@ -104,7 +104,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         $value = $this->object->getValue();
 
         if ($value instanceof Carbon) {
-            return $value->setTimezone(config('app.timezone'))->diffForHumans();
+            return $value->diffForHumans();
         }
 
         return null;
