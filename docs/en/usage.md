@@ -28,6 +28,10 @@ Lastly, you can also set the value with an instance of `Carbon`.
 
 The datetime field type returns `null` or an instance of `Carbon` in the configured timezone.
 
+<div class="alert alert-primary">
+<strong>Note:</strong> You can learn more about Carbon's API here: <a href="http://carbon.nesbot.com/docs/" target="_blank">http://carbon.nesbot.com/docs</a>
+</div>
+
 {% code php %}
 $entry->example->format('l jS \\of F Y h:i:s A'); // Thursday 25th of December 1975 02:15:16 PM;
 {% endcode %}
