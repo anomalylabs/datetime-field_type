@@ -8,7 +8,6 @@
 
 Below is the full configuration available with defaults.
 
-    {% code php %}
     protected $fields = [
         "example" => [
             "type"   => "anomaly.field_type.country",
@@ -23,7 +22,6 @@ Below is the full configuration available with defaults.
             ]
         ]
     ];
-    {% endcode %}
 
 <hr>
 
@@ -45,13 +43,13 @@ You can override these options by overloading the configuration file with a conf
 
 ### Default Value
 
-{{ code('php', '"default_type" => "now"') }}
+    "default_type" => "now"
 
 The `default_value` is a core option. This field type accepts any value that can be interpreted as a date/time value. This includes `timestamps`, strings readable by `strtotime`, and instances of `Carbon`.
 
 ### Input Mode
 
-{{ code('php', '"mode" => "date"') }}
+    "mode" => "date"
 
 Specify the input mode to display. Valid options are `datetime`, `date`, or `time`.
 
@@ -66,25 +64,25 @@ Specify the input mode to display. Valid options are `datetime`, `date`, or `tim
 
 ### Date Format
 
-{{ code('php', '"date_format" => "m/d/Y"') }}
+    "date_format" => "m/d/Y"
 
 Specify the date format to use for input / output. This option accepts any valid PHP date format string.
 
 ### Year Range
 
-{{ code('php', '"year_range" => "-10:+10"') }}
+    "year_range" => "-10:+10"
 
 You can limit the acceptable range of years the user can input by configuring the year range.
 
 ### Time Format
 
-{{ code('php', '"time_format" => "g:i A"') }}
+    "time_format" => "g:i A"
 
 Specify the time format to use for input / output. This option accepts any valid PHP date format string.
 
 ### Timezone
 
-{{ code('php', '"timezone" => "CST"') }}
+    "timezone" => "CST"
 
 Configure the input timezone independently from the system's timezone. By default, the value will be returned in the configured timezone as well.
 
@@ -96,7 +94,7 @@ Any valid PHP timezone code or value is a valid option. If none is defined the s
 
 ### Minute Interval Step
 
-{{ code('php', '"step" => 30') }}
+    "step" => 30
 
 The time's minute dropdown step can be configured by setting any integer.
 
