@@ -63,7 +63,7 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository $configuration
+     * @param Repository        $configuration
      */
     public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
@@ -131,7 +131,37 @@ class DatetimeFieldType extends FieldType
      */
     public function getPostValue($default = null)
     {
-        if (!array_filter($value = parent::getPostValue($default))) {
+        if (!$value = $this->getValidationValue($default)) {
+            return null;
+        }
+
+        try {
+            return (new Carbon())->createFromFormat(
+                $this->getPostFormat(),
+                trim(implode(' ', $value)),
+                $this->configuration->get('app.timezone')
+            );
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get the validation value.
+     *
+     * @param null $default
+     * @return mixed
+     */
+    public function getValidationValue($default = null)
+    {
+        $value = array_filter(
+            parent::getPostValue($default),
+            function ($value) {
+                return !empty($value);
+            }
+        );
+
+        if (!$value) {
             return $default;
         }
 
