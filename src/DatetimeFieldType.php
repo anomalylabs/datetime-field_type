@@ -38,9 +38,9 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
-        'date_format' => 'j F, Y',
         'year_range'  => '-50:+50',
-        'time_format' => 'g:i A',
+        'date_format' => null,
+        'time_format' => null,
         'timezone'    => null,
         'step'        => 15
     ];
@@ -90,6 +90,16 @@ class DatetimeFieldType extends FieldType
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
             $config['timezone'] = $this->configuration->get('app.timezone');
+        }
+
+        // Default date format.
+        if (!$config['date_format']) {
+            $config['date_format'] = $this->configuration->get('streams::datetime.date_format');
+        }
+
+        // Default time format.
+        if (!$config['time_format']) {
+            $config['time_format'] = $this->configuration->get('streams::datetime.time_format');
         }
 
         return $config;
