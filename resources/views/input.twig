@@ -17,6 +17,7 @@
                 class="form-control datepicker"
                 data-min="{{ field_type.config.min }}"
                 data-max="{{ field_type.config.max }}"
+                data-year-range="{{ field_type.config.year_range }}"
                 name="{{ field_type.input_name }}[date]"
                 value="{{ field_type.format(field_type.config.date_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.date_format) }}"
