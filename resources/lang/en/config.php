@@ -23,11 +23,12 @@ return [
     ],
     'step'        => [
         'label'        => 'Minute Step',
-        'instructions' => 'Select the minute step for the time input options.'
+        'instructions' => 'Select the minute interval for time input.'
     ],
     'year_range'  => [
         'label'        => 'Year Range',
-        'instructions' => 'Select the range of years to display.'
+        'placeholder'  => '1900:+100',
+        'instructions' => 'Select the range of years to display in <strong>min:max</strong> format using year values or +/- year values.',
     ],
     'min'         => [
         'label'        => 'Minimum Date',

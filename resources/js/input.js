@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize date pickers
-    $('input[data-provides="anomaly.field_type.datetime"].datepicker').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"][name$="[date]"]').each(function () {
 
         var input = $(this);
 
@@ -22,7 +22,7 @@ $(function () {
     });
 
     // Initialize time pickers
-    $('input[data-provides="anomaly.field_type.datetime"].timepicker').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"][name$="[time]"]').each(function () {
 
         var input = $(this);
 
