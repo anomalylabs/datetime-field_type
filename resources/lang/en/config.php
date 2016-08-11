@@ -25,7 +25,7 @@ return [
         'label'        => 'Minute Step',
         'instructions' => 'Select the minute step for the time input options.'
     ],
-    'year_range'        => [
+    'year_range'  => [
         'label'        => 'Year Range',
         'instructions' => 'Select the range of years to display.'
     ],
