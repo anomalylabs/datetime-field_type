@@ -55,7 +55,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone($this->config->get('app.timezone'));
+            $value->setTimezone('UTC');
         }
 
         return $value;
