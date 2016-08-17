@@ -129,4 +129,21 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     {
         return $this->format('r');
     }
+
+    /**
+     * Try mapping missing methods to Carbon.
+     *
+     * @param string $method
+     * @param array  $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        // Check if carbon has the method.
+        if (method_exists($value = $this->object->getValue(), $method)) {
+            return call_user_func_array([$value, $method], $arguments);
+        }
+
+        return parent::__call($method, $arguments);
+    }
 }
