@@ -55,7 +55,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone('UTC');
+            $value->setTimezone($this->config->get('streams::datetime.database_timezone'));
         }
 
         return $value;
@@ -69,7 +69,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function restore($value)
     {
-        if (!$value = $this->toCarbon($value, 'UTC')) {
+        if (!$value = $this->toCarbon($value, $this->config->get('streams::datetime.database_timezone'))) {
             return null;
         }
 
