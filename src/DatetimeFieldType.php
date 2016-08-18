@@ -149,7 +149,7 @@ class DatetimeFieldType extends FieldType
             return (new Carbon())->createFromFormat(
                 $this->getPostFormat(),
                 trim(implode(' ', $value)),
-                $this->configuration->get('app.timezone')
+                array_get($this->getConfig(), 'timezone')
             );
         } catch (\Exception $e) {
             return null;

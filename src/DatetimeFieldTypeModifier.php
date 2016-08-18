@@ -69,7 +69,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function restore($value)
     {
-        if (!$value = $this->toCarbon($value)) {
+        if (!$value = $this->toCarbon($value, 'UTC')) {
             return null;
         }
 
