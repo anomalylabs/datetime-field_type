@@ -10,7 +10,6 @@ use Illuminate\Contracts\Config\Repository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\DatetimeFieldType
  */
 class DatetimeFieldTypeModifier extends FieldTypeModifier
 {
@@ -84,8 +83,8 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      * Return a carbon instance
      * based on the value.
      *
-     * @param      $value
-     * @param null $timezone
+     * @param              $value
+     * @param  null        $timezone
      * @return Carbon|null
      * @throws \Exception
      */

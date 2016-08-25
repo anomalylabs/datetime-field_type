@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\DatetimeFieldType\Support
  */
 class DatetimeConverter
 {
@@ -32,7 +31,7 @@ class DatetimeConverter
         'n' => 'm',
         // Year
         'Y' => 'yy',
-        'y' => 'y'
+        'y' => 'y',
     ];
 
     /**
@@ -62,8 +61,8 @@ class DatetimeConverter
     /**
      * Convert a string according to a map.
      *
-     * @param       $string
-     * @param array $map
+     * @param         $string
+     * @param  array  $map
      * @return string
      */
     protected function convert($string, array $map)
@@ -71,7 +70,7 @@ class DatetimeConverter
         $stack     = '';
         $converted = '';
 
-        /**
+        /*
          * Add a space at the end so
          * we finish the string.
          */

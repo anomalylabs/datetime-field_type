@@ -11,7 +11,6 @@ use Illuminate\Config\Repository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\DatetimeFieldType
  */
 class DatetimeFieldType extends FieldType
 {
@@ -42,7 +41,7 @@ class DatetimeFieldType extends FieldType
         'date_format' => null,
         'time_format' => null,
         'timezone'    => null,
-        'step'        => 15
+        'step'        => 15,
     ];
 
     /**
@@ -136,7 +135,7 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the post value.
      *
-     * @param null $default
+     * @param  null        $default
      * @return null|Carbon
      */
     public function getPostValue($default = null)
@@ -159,7 +158,7 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the validation value.
      *
-     * @param null $default
+     * @param  null  $default
      * @return mixed
      */
     public function getValidationValue($default = null)
@@ -240,7 +239,7 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the output format.
      *
-     * @param null $output
+     * @param  null   $output
      * @return string
      */
     public function getOutputFormat($output = null)

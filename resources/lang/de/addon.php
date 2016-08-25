@@ -3,5 +3,5 @@
 return [
     'title'       => 'Datetime',
     'name'        => 'Datetime Feldtyp',
-    'description' => 'Ein Zeit- und Daumtsauswahl Feldtyp.'
+    'description' => 'Ein Zeit- und Daumtsauswahl Feldtyp.',
 ];

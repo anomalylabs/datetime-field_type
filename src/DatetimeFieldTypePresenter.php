@@ -9,7 +9,6 @@ use Carbon\Carbon;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\DatetimeFieldType
  */
 class DatetimeFieldTypePresenter extends FieldTypePresenter
 {
@@ -25,7 +24,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the value.
      *
-     * @param null $format
+     * @param  null        $format
      * @return null|string
      */
     public function format($format = null)
@@ -46,7 +45,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the date.
      *
-     * @param null $format
+     * @param  null        $format
      * @return null|string
      */
     public function date($format = null)
@@ -61,7 +60,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the time.
      *
-     * @param null $format
+     * @param  null        $format
      * @return null|string
      */
     public function time($format = null)
@@ -76,7 +75,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the value in user format.
      *
-     * @param null $format
+     * @param  null        $format
      * @return null|string
      */
     public function local($format = null)
@@ -133,8 +132,8 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Try mapping missing methods to Carbon.
      *
-     * @param string $method
-     * @param array  $arguments
+     * @param  string $method
+     * @param  array  $arguments
      * @return mixed
      */
     public function __call($method, $arguments)
