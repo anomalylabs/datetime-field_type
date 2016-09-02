@@ -54,11 +54,17 @@ return [
         'config' => [
             'min' => false,
         ],
+        'rules' => [
+            'nullable',
+        ],
     ],
     'max'         => [
         'type'   => 'anomaly.field_type.integer',
         'config' => [
             'min' => false,
+        ],
+        'rules' => [
+            'nullable',
         ],
     ],
 ];
