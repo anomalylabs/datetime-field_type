@@ -164,7 +164,7 @@ class DatetimeFieldType extends FieldType
     public function getValidationValue($default = null)
     {
         $value = array_filter(
-            (array)$this->getPostValue($default),
+            (array)parent::getPostValue($default),
             function ($value) {
                 return !empty($value);
             }
