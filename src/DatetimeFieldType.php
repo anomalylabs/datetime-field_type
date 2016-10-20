@@ -62,7 +62,7 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository        $configuration
+     * @param Repository $configuration
      */
     public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
@@ -135,12 +135,12 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the post value.
      *
-     * @param  null        $default
+     * @param  null $default
      * @return null|Carbon
      */
     public function getPostValue($default = null)
     {
-        if (!$value = $this->getValidationValue($default)) {
+        if (!$value = parent::getPostValue($default)) {
             return null;
         }
 
@@ -158,13 +158,13 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the validation value.
      *
-     * @param  null  $default
+     * @param  null $default
      * @return mixed
      */
     public function getValidationValue($default = null)
     {
         $value = array_filter(
-            parent::getPostValue($default),
+            (array)$this->getPostValue($default),
             function ($value) {
                 return !empty($value);
             }
@@ -239,7 +239,7 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the output format.
      *
-     * @param  null   $output
+     * @param  null $output
      * @return string
      */
     public function getOutputFormat($output = null)
