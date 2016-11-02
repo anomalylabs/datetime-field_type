@@ -49,8 +49,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function modify($value)
     {
-        if (!$value = $this->toCarbon($value)) {
+        if (!$value) {
             return null;
+        }
+
+        if (!$value instanceof \DateTime) {
+            $value = $this->toCarbon($value, array_get($this->fieldType->getConfig(), 'timezone'));
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
@@ -68,8 +72,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function restore($value)
     {
-        if (!$value = $this->toCarbon($value, $this->config->get('streams::datetime.database_timezone'))) {
+        if (!$value) {
             return null;
+        }
+
+        if (!$value instanceof \DateTime) {
+            $value = $this->toCarbon($value, $this->config->get('streams::datetime.database_timezone'));
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
