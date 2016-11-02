@@ -23,9 +23,8 @@ return [
         ],
     ],
     'time_format' => [
-        'type'     => 'anomaly.field_type.select',
-        'required' => true,
-        'config'   => [
+        'type'   => 'anomaly.field_type.select',
+        'config' => [
             'options' => function (\Illuminate\Contracts\Config\Repository $config) {
                 return $config->get('anomaly.field_type.datetime::formats.time');
             },

@@ -49,7 +49,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      */
     public function modify($value)
     {
-        if (!$value = $this->toCarbon($value, array_get($this->fieldType->getConfig(), 'timezone'))) {
+        if (!$value = $this->toCarbon($value)) {
             return null;
         }
 

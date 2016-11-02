@@ -8,9 +8,9 @@ use Illuminate\Config\Repository;
 /**
  * Class DatetimeFieldType
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class DatetimeFieldType extends FieldType
 {
@@ -62,7 +62,7 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository $configuration
+     * @param Repository        $configuration
      */
     public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
