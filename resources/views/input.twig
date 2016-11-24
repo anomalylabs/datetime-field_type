@@ -14,6 +14,7 @@
 
         <input
                 type="text"
+                class="form-control"
                 data-min="{{ field_type.config.min }}"
                 data-max="{{ field_type.config.max }}"
                 name="{{ field_type.input_name }}[date]"
@@ -37,6 +38,7 @@
 
         <input
                 type="text"
+                class="form-control"
                 name="{{ field_type.input_name }}[time]"
                 value="{{ field_type.format(field_type.config.time_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.time_format) }}"
