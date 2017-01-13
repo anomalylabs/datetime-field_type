@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize date pickers
-    $('input[data-provides="anomaly.field_type.datetime"][name$="[date]"]').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"][name$="[date]"]:not([data-initialized])').each(function () {
 
         var input = $(this);
 
@@ -9,16 +9,18 @@ $(function () {
             input.focus();
         });
 
-        $(this).datepicker({
-            dateFormat: $(this).data('date-format'),
-            yearRange: $(this).data('year-range'),
-            minDate: $(this).data('min'),
-            maxDate: $(this).data('max'),
-            selectOtherMonths: true,
-            showOtherMonths: true,
-            changeMonth: true,
-            changeYear: true
-        });
+        input
+            .attr('data-initialized', '')
+            .datepicker({
+                dateFormat: $(this).data('date-format'),
+                yearRange: $(this).data('year-range'),
+                minDate: $(this).data('min'),
+                maxDate: $(this).data('max'),
+                selectOtherMonths: true,
+                showOtherMonths: true,
+                changeMonth: true,
+                changeYear: true
+            });
     });
 
     // Initialize time pickers
