@@ -24,7 +24,7 @@ $(function () {
     });
 
     // Initialize time pickers
-    $('input[data-provides="anomaly.field_type.datetime"][name$="[time]:not([data-initialized])').each(function () {
+    $('input[data-provides="anomaly.field_type.datetime"][name$="[time]"]:not([data-initialized])').each(function () {
 
         var input = $(this);
 
