@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('ajaxComplete ready', function () {
 
     // Initialize date pickers
     $('input[data-provides="anomaly.field_type.datetime"][name$="[date]"]:not([data-initialized])').each(function () {
