@@ -246,14 +246,19 @@ class DatetimeFieldType extends FieldType
     {
         switch ($output ?: $this->getColumnType()) {
             case 'datetime':
-                return array_get($this->getConfig(), 'date_format') . ' ' . array_get(
-                    $this->getConfig(),
-                    'time_format'
-                );
+                return array_get(
+                        $this->getConfig(),
+                        'date_format',
+                        config('streams::datetime.date_format')
+                    ) . ' ' . array_get(
+                        $this->getConfig(),
+                        'time_format',
+                        config('streams::datetime.time_format')
+                    );
             case 'date':
-                return array_get($this->getConfig(), 'date_format');
+                return array_get($this->getConfig(), 'date_format', config('streams::datetime.date_format'));
             case 'time':
-                return array_get($this->getConfig(), 'time_format');
+                return array_get($this->getConfig(), 'time_format', config('streams::datetime.time_format'));
         }
     }
 }
