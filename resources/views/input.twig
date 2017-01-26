@@ -1,8 +1,10 @@
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery-ui.datepicker.min.js") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.timepicker.min.js") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::less/datepicker.less") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::less/timepicker.less") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
+{% if field_type.config.pickers %}
+    {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery-ui.datepicker.min.js") }}
+    {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.timepicker.min.js") }}
+    {{ asset_add("styles.css", "anomaly.field_type.datetime::less/datepicker.less") }}
+    {{ asset_add("styles.css", "anomaly.field_type.datetime::less/timepicker.less") }}
+    {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
+{% endif %}
 
 <div class="input-group">
 
@@ -13,12 +15,12 @@
         </span>
 
         <input
-                type="text"
                 class="form-control"
                 data-min="{{ field_type.config.min }}"
                 data-max="{{ field_type.config.max }}"
                 name="{{ field_type.input_name }}[date]"
                 data-year-range="{{ field_type.config.year_range }}"
+                type="{{ field_type.config.pickers ? 'text' : 'date' }}"
                 value="{{ field_type.format(field_type.config.date_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.date_format) }}"
                 data-date-format="{{ field_type.plugin_date_format }}"
@@ -37,9 +39,9 @@
         </span>
 
         <input
-                type="text"
                 class="form-control"
                 name="{{ field_type.input_name }}[time]"
+                type="{{ field_type.config.pickers ? 'text' : 'time' }}"
                 value="{{ field_type.format(field_type.config.time_format) }}"
                 placeholder="{{ 'now'|date(field_type.config.time_format) }}"
                 data-time-format="{{ field_type.config.time_format }}"

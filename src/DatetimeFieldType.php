@@ -1,6 +1,7 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
+use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Carbon\Carbon;
 use Illuminate\Config\Repository;
@@ -31,6 +32,28 @@ class DatetimeFieldType extends FieldType
     protected $inputView = 'anomaly.field_type.datetime::input';
 
     /**
+     * Field type rules.
+     *
+     * @var array
+     */
+    protected $rules = [
+        'valid_date',
+        'array',
+    ];
+
+    /**
+     * Field type validators.
+     *
+     * @var array
+     */
+    protected $validators = [
+        'valid_date' => [
+            'handler' => ValidateDatetime::class,
+            'message' => 'You suck!',
+        ],
+    ];
+
+    /**
      * The field type config.
      *
      * @var array
@@ -41,6 +64,7 @@ class DatetimeFieldType extends FieldType
         'date_format' => null,
         'time_format' => null,
         'timezone'    => null,
+        'pickers'     => true,
         'step'        => 15,
     ];
 
@@ -86,6 +110,15 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
+        /**
+         * If pickers are disabled then
+         * use HTML5 value formats.
+         */
+        if (!$config['pickers']) {
+            $config['date_format'] = 'Y-m-d';
+            $config['time_format'] = 'H:i:s';
+        }
+
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
             $config['timezone'] = $this->configuration->get('app.timezone');
@@ -112,9 +145,6 @@ class DatetimeFieldType extends FieldType
     public function getRules()
     {
         $rules = parent::getRules();
-
-        // We expect an array.
-        $rules[] = 'array';
 
         // Set amount of inputs to expect.
         switch (array_get($this->getConfig(), 'mode')) {
@@ -151,6 +181,15 @@ class DatetimeFieldType extends FieldType
                 array_get($this->getConfig(), 'timezone')
             );
         } catch (\Exception $e) {
+
+            /**
+             * Try saving the value if the format
+             * is not exactly what we're expecting.
+             */
+            if ($timestamp = strtotime(trim(implode(' ', $value)) . ' ' . array_get($this->getConfig(), 'timezone'))) {
+                return (new Carbon())->createFromTimestamp($timestamp);
+            }
+
             return null;
         }
     }
@@ -191,7 +230,7 @@ class DatetimeFieldType extends FieldType
      * Get the date format
      * for the plugin.
      *
-     * @return array
+     * @return string
      */
     public function getPluginDateFormat()
     {
