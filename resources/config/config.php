@@ -4,7 +4,6 @@ return [
     'mode'        => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
-        'disabled' => 'edit',
         'config'   => [
             'options' => [
                 'datetime' => 'anomaly.field_type.datetime::config.mode.datetime',
