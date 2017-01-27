@@ -8,10 +8,6 @@ return [
         'date'         => 'Date',
         'time'         => 'Time',
     ],
-    'pickers'     => [
-        'label'        => 'Enable Picker',
-        'instructions' => 'Do you want to enable pickers for the available inputs?',
-    ],
     'date_format' => [
         'label'        => 'Date Format',
         'instructions' => 'Select the format for the date input.',

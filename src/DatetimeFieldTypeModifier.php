@@ -45,7 +45,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      * Modify the value.
      *
      * @param $value
-     * @return int
+     * @return Carbon|null
      */
     public function modify($value)
     {
@@ -114,6 +114,6 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
             return (new Carbon())->createFromTimestamp($timestamp, $timezone);
         }
 
-        return (new Carbon())->createFromFormat($this->fieldType->getStorageFormat(), $value, $timezone);
+        return (new Carbon())->createFromFormat($this->fieldType->getDatetimeFormat(), $value, $timezone);
     }
 }

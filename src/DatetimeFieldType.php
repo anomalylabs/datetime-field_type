@@ -3,7 +3,6 @@
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Carbon\Carbon;
 use Illuminate\Config\Repository;
 
 /**
@@ -32,24 +31,23 @@ class DatetimeFieldType extends FieldType
     protected $inputView = 'anomaly.field_type.datetime::input';
 
     /**
-     * Field type rules.
+     * The field type rules.
      *
      * @var array
      */
     protected $rules = [
-        'valid_date',
-        'array',
+        'datetime',
     ];
 
     /**
-     * Field type validators.
+     * The field type validators.
      *
      * @var array
      */
     protected $validators = [
-        'valid_date' => [
+        'datetime' => [
             'handler' => ValidateDatetime::class,
-            'message' => 'You suck!',
+            'message' => 'The date/time format is invalid.',
         ],
     ];
 
@@ -110,15 +108,6 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
-        /**
-         * If pickers are disabled then
-         * use HTML5 value formats.
-         */
-        if (!$config['pickers']) {
-            $config['date_format'] = 'Y-m-d';
-            $config['time_format'] = 'H:i:s';
-        }
-
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
             $config['timezone'] = $this->configuration->get('app.timezone');
@@ -138,85 +127,6 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Get the rules.
-     *
-     * @return array
-     */
-    public function getRules()
-    {
-        $rules = parent::getRules();
-
-        // Set amount of inputs to expect.
-        switch (array_get($this->getConfig(), 'mode')) {
-            case 'datetime':
-                $rules[] = 'size:2';
-                break;
-            case 'time':
-                $rules[] = 'size:1';
-                break;
-            case 'date':
-                $rules[] = 'size:1';
-                break;
-        }
-
-        return $rules;
-    }
-
-    /**
-     * Get the post value.
-     *
-     * @param  null $default
-     * @return null|Carbon
-     */
-    public function getPostValue($default = null)
-    {
-        if (!$value = parent::getPostValue($default)) {
-            return null;
-        }
-
-        try {
-            return (new Carbon())->createFromFormat(
-                $this->getPostFormat(),
-                trim(implode(' ', $value)),
-                array_get($this->getConfig(), 'timezone')
-            );
-        } catch (\Exception $e) {
-
-            /**
-             * Try saving the value if the format
-             * is not exactly what we're expecting.
-             */
-            if ($timestamp = strtotime(trim(implode(' ', $value)) . ' ' . array_get($this->getConfig(), 'timezone'))) {
-                return (new Carbon())->createFromTimestamp($timestamp);
-            }
-
-            return null;
-        }
-    }
-
-    /**
-     * Get the validation value.
-     *
-     * @param  null $default
-     * @return mixed
-     */
-    public function getValidationValue($default = null)
-    {
-        $value = array_filter(
-            (array)parent::getPostValue($default),
-            function ($value) {
-                return !empty($value);
-            }
-        );
-
-        if (!$value) {
-            return $default;
-        }
-
-        return $value;
-    }
-
-    /**
      * Get the column type.
      *
      * @return string
@@ -232,9 +142,9 @@ class DatetimeFieldType extends FieldType
      *
      * @return string
      */
-    public function getPluginDateFormat()
+    public function getPluginFormat()
     {
-        return $this->converter->toJs(array_get($this->getConfig(), 'date_format'));
+        return $this->converter->toJs($this->getDatetimeFormat());
     }
 
     /**
@@ -242,7 +152,7 @@ class DatetimeFieldType extends FieldType
      *
      * @return string
      */
-    protected function getPostFormat()
+    public function getDatetimeFormat()
     {
         $mode = array_get($this->getConfig(), 'mode');
         $date = array_get($this->getConfig(), 'date_format');
@@ -299,5 +209,7 @@ class DatetimeFieldType extends FieldType
             case 'time':
                 return array_get($this->getConfig(), 'time_format', config('streams::datetime.time_format'));
         }
+
+        return null;
     }
 }

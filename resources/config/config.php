@@ -12,9 +12,6 @@ return [
             ],
         ],
     ],
-    'pickers'     => [
-        'type' => 'anomaly.field_type.boolean',
-    ],
     'date_format' => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,

@@ -18,19 +18,26 @@ class DatetimeConverter
      * @var array
      */
     protected $map = [
+        // AM/PM
+        'A' => 'a',
+        // Minute
+        'i' => 'M',
+        // Hour
+        'g' => 'h',
+        'h' => 'H',
         // Day
-        'd' => 'dd',
-        'D' => 'D',
-        'j' => 'd',
-        'l' => 'DD',
+        'd' => 'd',
+        'D' => 'w',
+        'j' => 'D',
+        'l' => 'W',
         'z' => 'o',
         // Month
-        'F' => 'MM',
-        'm' => 'mm',
-        'M' => 'M',
-        'n' => 'm',
+        'F' => 'N',
+        'm' => 'O',
+        'M' => 'n',
+        'n' => 'o',
         // Year
-        'Y' => 'yy',
+        'Y' => 'Y',
         'y' => 'y',
     ];
 
