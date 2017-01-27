@@ -43,16 +43,4 @@ return [
             'min'           => 1,
         ],
     ],
-    'min'         => [
-        'type'   => 'anomaly.field_type.integer',
-        'config' => [
-            'min' => false,
-        ],
-    ],
-    'max'         => [
-        'type'   => 'anomaly.field_type.integer',
-        'config' => [
-            'min' => false,
-        ],
-    ],
 ];

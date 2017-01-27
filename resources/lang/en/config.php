@@ -25,14 +25,4 @@ return [
         'label'        => 'Minute Step',
         'instructions' => 'Select the minute interval for time input.',
     ],
-    'min'         => [
-        'label'        => 'Minimum Date',
-        'instructions' => 'Enter the minimum date allowed in days offset from the date of input.',
-        'placeholder'  => '-30',
-    ],
-    'max'         => [
-        'label'        => 'Maximum Date',
-        'instructions' => 'Enter the maximum date allowed in days offset from the date of input.',
-        'placeholder'  => '45',
-    ],
 ];
