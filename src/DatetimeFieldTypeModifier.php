@@ -77,7 +77,11 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if (!$value instanceof \DateTime) {
-            $value = $this->toCarbon($value, $this->config->get('streams::datetime.database_timezone'));
+            $value = (new Carbon())->createFromFormat(
+                $this->fieldType->getStorageFormat(),
+                $value,
+                $this->config->get('streams::datetime.database_timezone')
+            );
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
@@ -108,10 +112,6 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
 
         if (is_numeric($value)) {
             return (new Carbon())->createFromTimestamp($value, $timezone);
-        }
-
-        if ($timestamp = strtotime($value)) {
-            return (new Carbon())->createFromTimestamp($timestamp, $timezone);
         }
 
         return (new Carbon())->createFromFormat($this->fieldType->getDatetimeFormat(), $value, $timezone);

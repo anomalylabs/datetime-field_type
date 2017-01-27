@@ -58,12 +58,10 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
-        'year_range'  => '-50:+50',
         'date_format' => null,
         'time_format' => null,
         'timezone'    => null,
-        'pickers'     => true,
-        'step'        => 15,
+        'step'        => 1,
     ];
 
     /**

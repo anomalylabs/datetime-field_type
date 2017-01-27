@@ -6,14 +6,8 @@ $(document).on('ajaxComplete ready', function () {
         $(this).attr('data-initialized', '')
             .datetimeEntry({
                 spinnerImage: '',
+                timeSteps: [1, $(this).data('step')],
                 datetimeFormat: $(this).data('datetime-format')
-                // yearRange: $(this).data('year-range'),
-                // minDate: $(this).data('min'),
-                // maxDate: $(this).data('max'),
-                // selectOtherMonths: true,
-                // showOtherMonths: true,
-                // changeMonth: true,
-                // changeYear: true
             });
     });
 });

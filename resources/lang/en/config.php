@@ -25,11 +25,6 @@ return [
         'label'        => 'Minute Step',
         'instructions' => 'Select the minute interval for time input.',
     ],
-    'year_range'  => [
-        'label'        => 'Year Range',
-        'placeholder'  => '1900:+100',
-        'instructions' => 'Select the range of years to display in <strong>min:max</strong> format using year values or +/- year values.',
-    ],
     'min'         => [
         'label'        => 'Minimum Date',
         'instructions' => 'Enter the minimum date allowed in days offset from the date of input.',

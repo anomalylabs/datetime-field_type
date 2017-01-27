@@ -43,10 +43,6 @@ return [
             'min'           => 1,
         ],
     ],
-    'year_range'  => [
-        'required' => true,
-        'type'     => 'anomaly.field_type.text',
-    ],
     'min'         => [
         'type'   => 'anomaly.field_type.integer',
         'config' => [
