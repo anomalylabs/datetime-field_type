@@ -25,10 +25,11 @@ class DatetimeConverter
         // Hour
         'g' => 'h',
         'h' => 'H',
+        'H' => 'H',
         // Day
-        'd' => 'd',
+        'd' => 'D',
         'D' => 'w',
-        'j' => 'D',
+        'j' => 'd',
         'l' => 'W',
         'z' => 'o',
         // Month
