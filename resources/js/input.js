@@ -3,6 +3,7 @@ $(document).on('ajaxComplete ready', function () {
     // Initialize date pickers
     $('input[data-provides="anomaly.field_type.datetime"][name$="[date]"]:not([data-initialized])').each(function () {
 
+        $('#ui-datepicker-div').remove();
         var input = $(this);
 
         input.prev('.icon').click(function () {
