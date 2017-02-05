@@ -39,7 +39,13 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
             return $value->format($format);
         }
 
-        return null;
+        try {
+            (new Carbon())->createFromFormat($format, $value);
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return $value;
     }
 
     /**
