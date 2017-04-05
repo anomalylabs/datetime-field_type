@@ -17,8 +17,10 @@
             {{ field_type.disabled ? 'disabled' }}
             {{ field_type.readonly ? 'readonly' }}>
 
-    <span class="input-group-addon">
-        {{ field_type.config.timezone }}
-    </span>
+    {% if field_type.config.mode != 'date' %}
+        <span class="input-group-addon">
+            {{ field_type.config.timezone }}
+        </span>
+    {% endif %}
 
 </div>
