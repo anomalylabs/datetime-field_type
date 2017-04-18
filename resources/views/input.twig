@@ -1,10 +1,12 @@
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.plugin.min.js") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/jquery.datetimeentry.min.js") }}
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/input.js") }}
+{{ asset_add('theme.css', 'anomaly.field_type.datetime::css/flatpickr.min.css') }}
+{{ asset_add('theme.css', 'anomaly.field_type.datetime::css/base16_flat.css') }}
+{{ asset_add('scripts.js', 'anomaly.field_type.datetime::js/flatpickr.min.js') }}
+{{ asset_add('scripts.js', 'anomaly.field_type.datetime::js/input.js') }}
 
 <div class="input-group">
 
     <input
+            data-input
             type="text"
             class="form-control"
             name="{{ field_type.input_name }}"
