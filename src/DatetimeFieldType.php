@@ -3,7 +3,7 @@
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class DatetimeFieldType
