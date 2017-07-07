@@ -24,13 +24,6 @@ class DatetimeFieldType extends FieldType
     protected $columnType = 'datetime';
 
     /**
-     * The input view.
-     *
-     * @var string
-     */
-    protected $inputView = 'anomaly.field_type.datetime::input';
-
-    /**
      * The field type rules.
      *
      * @var array
@@ -38,6 +31,13 @@ class DatetimeFieldType extends FieldType
     protected $rules = [
         'datetime',
     ];
+
+    /**
+     * The input view.
+     *
+     * @var string
+     */
+    protected $inputView = null;
 
     /**
      * The field type validators.
@@ -58,6 +58,7 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
+        'picker'      => true,
         'date_format' => null,
         'time_format' => null,
         'timezone'    => null,
@@ -142,6 +143,45 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
+     * Get the input view.
+     *
+     * @return string
+     */
+    public function getInputView()
+    {
+        if ($view = parent::getInputView()) {
+            return $view;
+        }
+
+        if ($this->isPicker()) {
+            return 'anomaly.field_type.datetime::picker';
+        }
+
+        return 'anomaly.field_type.datetime::input';
+    }
+
+    /**
+     * Return if the picker
+     * is enabled or not.
+     *
+     * @return bool
+     */
+    public function isPicker()
+    {
+        return array_get($this->getConfig(), 'picker') == true;
+    }
+
+    /**
+     * Return the conversion map to use.
+     *
+     * @return string
+     */
+    public function converterMap()
+    {
+        return $this->isPicker() ? 'picker' : 'default';
+    }
+
+    /**
      * Get the date format
      * for the plugin.
      *
@@ -149,7 +189,10 @@ class DatetimeFieldType extends FieldType
      */
     public function getPluginFormat()
     {
-        return $this->converter->toJs($this->getDatetimeFormat());
+        return $this->converter->toJs(
+            $this->getDatetimeFormat(),
+            $this->converterMap()
+        );
     }
 
     /**

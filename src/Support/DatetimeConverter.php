@@ -11,59 +11,89 @@ class DatetimeConverter
 {
 
     /**
-     * A map of PHP to JS
+     * Maps of PHP to JS
      * date symbols. Time
      * has no conversion.
      *
      * @var array
      */
-    protected $map = [
-        // AM/PM
-        'A' => 'a',
-        // Minute
-        'i' => 'M',
-        // Hour
-        'g' => 'h',
-        'h' => 'H',
-        'H' => 'H',
-        // Day
-        'd' => 'D',
-        'D' => 'w',
-        'j' => 'd',
-        'l' => 'W',
-        'z' => 'o',
-        // Month
-        'F' => 'N',
-        'm' => 'O',
-        'M' => 'n',
-        'n' => 'o',
-        // Year
-        'Y' => 'Y',
-        'y' => 'y',
+    protected $maps = [
+        'default' => [
+            // AM/PM
+            'A' => 'a',
+            // Minute
+            'i' => 'M',
+            // Hour
+            'g' => 'h',
+            'G' => 'H',
+            'h' => 'h',
+            'H' => 'H',
+            // Day
+            'd' => 'D',
+            'D' => 'w',
+            'j' => 'd',
+            'l' => 'W',
+            'z' => 'o',
+            // Month
+            'F' => 'N',
+            'm' => 'O',
+            'M' => 'n',
+            'n' => 'o',
+            // Year
+            'Y' => 'Y',
+            'y' => 'y',
+        ],
+        'picker'  => [
+            // AM/PM
+            'A' => 'K',
+            // Hour
+            'g' => 'h',
+            'G' => 'H',
+            'h' => 'h',
+            'H' => 'H',
+            // Minute
+            'i' => 'i',
+            // Day
+            'd' => 'd',
+            'D' => 'D',
+            'j' => 'j',
+            'l' => 'l',
+            'z' => 'z',
+            // Month
+            'F' => 'F',
+            'm' => 'm',
+            'M' => 'M',
+            'n' => 'n',
+            // Year
+            'Y' => 'Y',
+            'y' => 'y',
+        ],
     ];
 
     /**
      * Return the PHP equivalent
      * of the provided JS date string.
      *
-     * @param $js
+     * @param        $js
+     * @param string $map
      * @return string
      */
-    public function toPhp($js)
+    public function toPhp($js, $map = 'default')
     {
-        return $this->convert($js, array_flip($this->map));
+        return $this->convert($js, array_flip($this->maps[$map]));
     }
 
     /**
      * Return the JS equivalent
      * of the provided PHP date string.
      *
-     * @param $php
+     * @param        $php
+     * @param string $map
      * @return string
      */
-    public function toJs($php)
+    public function toJs($php, $map = 'default')
     {
-        return $this->convert($php, $this->map);
+        return $this->convert($php, $this->maps[$map]);
     }
 
     /**

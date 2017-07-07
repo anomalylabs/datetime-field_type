@@ -12,6 +12,9 @@ return [
             ],
         ],
     ],
+    'picker'      => [
+        'type' => 'anomaly.field_type.boolean',
+    ],
     'date_format' => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
@@ -32,6 +35,7 @@ return [
     'timezone'    => [
         'type'   => 'anomaly.field_type.select',
         'config' => [
+            'mode'    => 'search',
             'handler' => 'timezones',
         ],
     ],
