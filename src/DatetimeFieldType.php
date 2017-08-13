@@ -21,7 +21,7 @@ class DatetimeFieldType extends FieldType
      *
      * @var string
      */
-    protected $columnType = 'datetime';
+    protected $columnType = 'dateTime';
 
     /**
      * The field type rules.
@@ -139,6 +139,10 @@ class DatetimeFieldType extends FieldType
      */
     public function getColumnType()
     {
+        if (env('DB_CONNECTION') == 'pgsql') {
+            return 'dateTime';
+        }
+
         return array_get($this->config, 'mode');
     }
 
