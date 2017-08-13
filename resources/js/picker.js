@@ -4,14 +4,17 @@ $(document).on('ajaxComplete ready', function () {
     $('input[data-provides="anomaly.field_type.datetime"]:not([data-initialized])').each(function () {
 
         var $this = $(this);
+        var inputMode = $this.data('input-mode');
 
-        $this.attr('data-initialized', '')
-            .flatpickr({
-                altInput: true,
-                allowInput: true,
-                minuteIncrement: $this.data('step'),
-                dateFormat: $this.data('datetime-format'),
-                enableTime: $this.data('input-mode').indexOf('time') !== -1
-            });
+        var options = {
+            altInput: true,
+            allowInput: true,
+            minuteIncrement: $this.data('step') || 1,
+            dateFormat: $this.data('datetime-format'),
+            enableTime: inputMode !== 'date',
+            noCalendar: inputMode === 'time'
+        };
+
+        $this.attr('data-initialized', '').flatpickr(options);
     });
 });
