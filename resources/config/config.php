@@ -19,17 +19,13 @@ return [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-                return $config->get('anomaly.field_type.datetime::formats.date');
-            },
+            'options' => config('anomaly.field_type.datetime::formats.date'),
         ],
     ],
     'time_format' => [
         'type'   => 'anomaly.field_type.select',
         'config' => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-                return $config->get('anomaly.field_type.datetime::formats.time');
-            },
+            'options' => config('anomaly.field_type.datetime::formats.time'),
         ],
     ],
     'timezone'    => [
