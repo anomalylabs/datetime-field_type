@@ -1,0 +1,264 @@
+---
+title: Introduction
+---
+
+## Introduction[](#introduction)
+
+`anomaly.field_type.datetime`
+
+The datetime field type provides a customizable date and/or time input.
+
+
+### Configuration[](#introduction/configuration)
+
+Below is the full configuration available with defaults values:
+
+    "example" => [
+        "type"   => "anomaly.field_type.datetime",
+        "config" => [
+            "default_value" => null,
+            "mode"          => "datetime",
+            "date_format"   => "j F, Y",
+            "year_range"    => "-50:+50",
+            "time_format"   => "g:i A",
+            "timezone"      => null,
+            "step"          => 15,
+            "min"           => null,
+            "max"           => null
+        ]
+    ]
+
+###### Configuration
+
+<table class="table table-bordered table-striped">
+
+<thead>
+
+<tr>
+
+<th>Key</th>
+
+<th>Example</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+default
+
+</td>
+
+<td>
+
+`now`
+
+</td>
+
+<td>
+
+The default value.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+mode
+
+</td>
+
+<td>
+
+time
+
+</td>
+
+<td>
+
+The input mode. Valid options are `datetime`, `date`, and `time`.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+date_format
+
+</td>
+
+<td>
+
+`l jS \\of F Y`
+
+</td>
+
+<td>
+
+A PHP date format. Only used in `datetime` and `date` modes.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+year_range
+
+</td>
+
+<td>
+
+`-5:+50`
+
+</td>
+
+<td>
+
+A range of valid years to choose from.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+time_format
+
+</td>
+
+<td>
+
+`h:i:s A`
+
+</td>
+
+<td>
+
+A PHP date format. Only used in `datetime` and `time` modes.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+timezone
+
+</td>
+
+<td>
+
+`America/Chicago`
+
+</td>
+
+<td>
+
+The timezone for the input and output. Defaults to system configured timezone.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+step
+
+</td>
+
+<td>
+
+30
+
+</td>
+
+<td>
+
+The minute step detail. Only used in `datetime` and `time` modes.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+min
+
+</td>
+
+<td>
+
+-1w
+
+</td>
+
+<td>
+
+A valid number or string option accepted by [jQuery Datepicker](https://api.jqueryui.com/datepicker/#option-minDate)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+max
+
+</td>
+
+<td>
+
++1w
+
+</td>
+
+<td>
+
+A valid number or string option accepted by [jQuery Datepicker](https://api.jqueryui.com/datepicker/#option-maxDate)
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+#### Addon Configuration[](#introduction/configuration/addon-configuration)
+
+The datetime configuration options are controlled by the field type's `formats.php` configuration file.
+
+You can override these options by publishing the addon and modifying the resulting configuration file:
+
+    php artisan addon:publish anomaly.field_type.datetime
+
+The field type will be published to `/resources/{application}/addons/anomaly/datetime-field_type`.
+
+<div class="alert alert-success">**Contribute:** If you have options to add or have found an error, submit a pull request to [https://github.com/anomalylabs/datetime-field_type](https://github.com/anomalylabs/datetime-field_type)</div>
