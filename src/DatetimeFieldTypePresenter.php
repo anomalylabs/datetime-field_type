@@ -153,9 +153,9 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     }
     
     /**
-     * Handle this the same way phps DateTime
-     * class does. Allowing for comparison of
-     * two DatetimeFields.
+     * Handle this the same way phps 
+     * DateTime / Carbon does. Allowing
+     * for comparison of DatetimeFields.
      * @return string
      */
     public function __toString()
