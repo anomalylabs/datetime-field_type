@@ -40,6 +40,13 @@ class DatetimeFieldType extends FieldType
     protected $inputView = null;
 
     /**
+     * The filter view.
+     *
+     * @var string
+     */
+    protected $filterView = 'anomaly.field_type.datetime::filter';
+
+    /**
      * The field type validators.
      *
      * @var array
