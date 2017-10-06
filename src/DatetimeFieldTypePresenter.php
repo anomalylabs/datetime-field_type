@@ -151,4 +151,15 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
 
         return parent::__call($method, $arguments);
     }
+    
+    /**
+     * Handle this the same way phps 
+     * DateTime / Carbon does. Allowing
+     * for comparison of DatetimeFields.
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->object->getValue();
+    }
 }
