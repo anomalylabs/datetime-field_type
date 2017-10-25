@@ -7,6 +7,7 @@ $(document).on('ajaxComplete ready', function () {
         var inputMode = $this.data('input-mode');
 
         var options = {
+            locale: $this.data('locale'),
             altInput: true,
             allowInput: true,
             minuteIncrement: $this.data('step') || 1,
