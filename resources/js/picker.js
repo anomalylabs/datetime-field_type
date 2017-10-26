@@ -7,9 +7,9 @@ $(document).on('ajaxComplete ready', function () {
         var inputMode = $this.data('input-mode');
 
         var options = {
-            locale: $this.data('locale'),
             altInput: true,
             allowInput: true,
+            locale: $this.data('locale'),
             minuteIncrement: $this.data('step') || 1,
             dateFormat: $this.data('datetime-format'),
             time_24hr: Boolean($this.data('datetime-format').match(/[GH]/)),
