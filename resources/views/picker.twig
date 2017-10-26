@@ -1,10 +1,13 @@
-{% set locale = setting_value('streams::locales.default', config('app.locale')) %}
-
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/flatpickr.min.js") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/flatpicker.scss") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/light.scss") }}
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/picker.js") }}
-{{ asset_add("scripts.js", "https://npmcdn.com/flatpickr/dist/l10n/" ~ locale ~ ".js") }}
+
+{% for locale in setting_value('streams::enabled_locales', {0:config('app.fallback_locale')}) %}
+    {% if locale != 'en' %}
+        {{ asset_add("scripts.js", "https://npmcdn.com/flatpickr/dist/l10n/" ~ locale ~ ".js") }}
+    {% endif %}
+{% endfor %}
 
 <div class="input-group">
 
@@ -13,7 +16,7 @@
             class="form-control"
             name="{{ field_type.input_name }}"
             data-step="{{ field_type.config.step }}"
-            data-locale="{{ locale }}"
+            data-locale="{{ setting_value('streams::locales.default', config('app.locale')) }}"
             data-input-mode="{{ field_type.config.mode }}"
             value="{{ field_type.format(field_type.datetime_format) }}"
             placeholder="{{ 'now'|date(field_type.datetime_format) }}"
