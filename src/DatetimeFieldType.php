@@ -3,6 +3,7 @@
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Carbon\Carbon;
 use Illuminate\Contracts\Config\Repository;
 
 /**
@@ -192,12 +193,48 @@ class DatetimeFieldType extends FieldType
      * Get the date format
      * for the plugin.
      *
+     * @param null $mode
      * @return string
      */
-    public function getPluginFormat()
+    public function getPluginFormat($mode = null)
     {
         return $this->converter->toJs(
-            $this->getDatetimeFormat(),
+            $this->getDatetimeFormat($mode),
+            $this->converterMap()
+        );
+    }
+
+    /**
+     * Get the input value.
+     *
+     * @param null $default
+     * @return Carbon
+     */
+    public function getInputValue($default = null)
+    {
+        $value = (new Carbon())->createFromFormat(
+            str_replace(':s', '', $this->getStorageFormat()),
+            parent::getInputValue($default),
+            $this->configuration->get('streams::datetime.database_timezone')
+        );
+
+        if ($this->config('mode') !== 'date') {
+            $value->setTimezone(array_get($this->getConfig(), 'timezone'));
+        }
+        
+        return $value;
+    }
+
+    /**
+     * Get the input format
+     * for the plugin.
+     *
+     * @return string
+     */
+    public function getInputFormat()
+    {
+        return $this->converter->toJs(
+            str_replace(':s', '', $this->getStorageFormat()),
             $this->converterMap()
         );
     }
@@ -205,11 +242,12 @@ class DatetimeFieldType extends FieldType
     /**
      * Get the post format.
      *
+     * @param $mode
      * @return string
      */
-    public function getDatetimeFormat()
+    public function getDatetimeFormat($mode = null)
     {
-        $mode = array_get($this->getConfig(), 'mode');
+        $mode = $mode ?: array_get($this->getConfig(), 'mode');
         $date = array_get($this->getConfig(), 'date_format');
         $time = array_get($this->getConfig(), 'time_format');
 

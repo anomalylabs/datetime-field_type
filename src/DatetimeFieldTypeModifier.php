@@ -81,7 +81,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
                 $value = (new Carbon())->createFromFormat(
                     $this->fieldType->getStorageFormat(),
                     $value,
-                    $this->config->get('streams::datetime.database_timezone')
+                    array_get($this->fieldType->getConfig(), 'timezone')
                 );
             } catch (\Exception $e) {
                 $value = (new Carbon())->createFromTimestamp(
