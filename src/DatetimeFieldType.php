@@ -221,7 +221,7 @@ class DatetimeFieldType extends FieldType
         if ($this->config('mode') !== 'date') {
             $value->setTimezone(array_get($this->getConfig(), 'timezone'));
         }
-        
+
         return $value;
     }
 

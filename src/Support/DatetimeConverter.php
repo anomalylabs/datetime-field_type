@@ -46,6 +46,7 @@ class DatetimeConverter
         'picker'  => [
             // AM/PM
             'A' => 'K',
+            'a' => 'K',
             // Hour
             'g' => 'h',
             'G' => 'H',

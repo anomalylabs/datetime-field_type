@@ -10,7 +10,6 @@ return [
     ],
     'time' => [
         'g:i A' => date('g:i A'), // 4:00 PM,
-        'g:i a' => date('g:i a'), // 4:00 pm,
         'H:i'   => date('H:i'), // 16:00,
     ],
 ];
