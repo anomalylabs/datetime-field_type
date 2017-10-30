@@ -132,11 +132,6 @@ class DatetimeFieldType extends FieldType
             $config['time_format'] = $this->configuration->get('streams::datetime.time_format');
         }
 
-        // Make sure format is supported.
-        if (!in_array($config['date_format'], array_keys($formats))) {
-            $config['date_format'] = array_first(array_keys($formats));
-        }
-
         return $config;
     }
 
