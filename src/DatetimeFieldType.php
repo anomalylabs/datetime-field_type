@@ -208,7 +208,7 @@ class DatetimeFieldType extends FieldType
      * Get the input value.
      *
      * @param null $default
-     * @return Carbon
+     * @return Carbon|null
      */
     public function getInputValue($default = null)
     {
