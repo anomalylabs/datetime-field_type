@@ -212,9 +212,13 @@ class DatetimeFieldType extends FieldType
      */
     public function getInputValue($default = null)
     {
+        if (!$value = parent::getInputValue($default)) {
+            return null;
+        }
+
         $value = (new Carbon())->createFromFormat(
             str_replace(':s', '', $this->getStorageFormat()),
-            parent::getInputValue($default),
+            $value,
             $this->configuration->get('streams::datetime.database_timezone')
         );
 
