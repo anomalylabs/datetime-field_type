@@ -309,4 +309,24 @@ class DatetimeFieldType extends FieldType
 
         return null;
     }
+
+    /**
+     * Get the placeholder.
+     *
+     * @return int|null|string
+     */
+    public function getPlaceholder()
+    {
+        $placeholder = parent::getPlaceholder();
+
+        if ($placeholder === false) {
+            return null;
+        }
+
+        if ($placeholder === null) {
+            return date($this->getDatetimeFormat());
+        }
+
+        return $placeholder;
+    }
 }
