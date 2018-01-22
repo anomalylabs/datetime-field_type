@@ -36,7 +36,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
         }
 
         if ($value instanceof Carbon) {
-            return $value->format($format);
+            return $value->year > 0 ? $value->format($format) : null;
         }
 
         try {
