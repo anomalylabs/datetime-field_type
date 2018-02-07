@@ -8,7 +8,7 @@ $(document).on('ajaxComplete ready', function () {
 
         let options = {
             altInput: true,
-            allowInput: true,
+            allowInput: false,
             locale: $this.data('locale'),
             minuteIncrement: $this.data('step') || 1,
             altFormat: $this.data('alt-format'),
