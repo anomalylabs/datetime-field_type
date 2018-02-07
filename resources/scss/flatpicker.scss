@@ -967,3 +967,9 @@ span.flatpickr-weekday {
         opacity: 1;
     }
 }
+
+// Removing the disabled look 
+.form-control.flatpickr-input.input
+{
+    background-color:#fff;
+}
