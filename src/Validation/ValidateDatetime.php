@@ -17,13 +17,18 @@ class ValidateDatetime
     /**
      * Handle the validation.
      *
-     * @param FormBuilder   $builder
+     * @param FormBuilder $builder
      * @param               $attribute
      * @param               $value
      * @return bool
      */
     public function handle(FormBuilder $builder, $attribute, $value)
     {
+
+        if (empty($value)) {
+            return true;
+        }
+
         /* @var $fieldType DatetimeFieldType */
         $fieldType = $builder->getFormFieldFromAttribute($attribute);
 
