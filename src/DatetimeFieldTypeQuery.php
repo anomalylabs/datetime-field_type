@@ -24,6 +24,15 @@ class DatetimeFieldTypeQuery extends FieldTypeQuery
      */
     public function filter(Builder $query, FilterInterface $filter)
     {
+        
+        /**
+         * Make sure the filter value
+         * is something we can use.
+         */
+        if (strpos($filter->getValue(), ' to ') === false) {
+            return;
+        }
+
         list($from, $to) = explode(' to ', $filter->getValue());
 
         $from = Carbon::createFromFormat(config('streams::datetime.date_format'), $from)

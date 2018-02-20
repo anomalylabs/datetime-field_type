@@ -28,7 +28,7 @@ class ValidateDatetime
         $fieldType = $builder->getFormFieldFromAttribute($attribute);
 
         try {
-            (new Carbon())->createFromFormat(str_replace(':s', '', $fieldType->getStorageFormat()), $value);
+            (new Carbon())->createFromFormat($fieldType->getPostFormat(), $value);
         } catch (\Exception $e) {
             return false;
         }

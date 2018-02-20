@@ -217,7 +217,7 @@ class DatetimeFieldType extends FieldType
         }
 
         $value = (new Carbon())->createFromFormat(
-            str_replace(':s', '', $this->getStorageFormat()),
+            $this->getPostFormat(),
             $value,
             $this->configuration->get('streams::datetime.database_timezone')
         );
@@ -252,6 +252,7 @@ class DatetimeFieldType extends FieldType
     public function getDatetimeFormat($mode = null)
     {
         $mode = $mode ?: array_get($this->getConfig(), 'mode');
+
         $date = array_get($this->getConfig(), 'date_format');
         $time = array_get($this->getConfig(), 'time_format');
 
@@ -283,6 +284,21 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
+     * Get the expected post
+     * format for validation.
+     *
+     * @return string
+     */
+    public function getPostFormat()
+    {
+        if ($this->config('picker')) {
+            return str_replace(':s', '', $this->getStorageFormat());
+        }
+
+        return $this->getDatetimeFormat();
+    }
+
+    /**
      * Get the output format.
      *
      * @param  null $output
@@ -308,5 +324,25 @@ class DatetimeFieldType extends FieldType
         }
 
         return null;
+    }
+
+    /**
+     * Get the placeholder.
+     *
+     * @return int|null|string
+     */
+    public function getPlaceholder()
+    {
+        $placeholder = parent::getPlaceholder();
+
+        if ($placeholder === false) {
+            return null;
+        }
+
+        if ($placeholder === null) {
+            return date($this->getDatetimeFormat());
+        }
+
+        return $placeholder;
     }
 }
