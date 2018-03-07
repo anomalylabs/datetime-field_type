@@ -19,12 +19,12 @@ class DatetimeFieldTypeQuery extends FieldTypeQuery
      * Filter a query by the value of a
      * field using this field type.
      *
-     * @param Builder         $query
+     * @param Builder $query
      * @param FilterInterface $filter
      */
     public function filter(Builder $query, FilterInterface $filter)
     {
-        
+
         /**
          * Make sure the filter value
          * is something we can use.
@@ -45,7 +45,7 @@ class DatetimeFieldTypeQuery extends FieldTypeQuery
             ->setTime(23, 59, 59)// Include up to the end of the day.
             ->setTimezone(config('streams::datetime.default_timezone'));
 
-        $query->whereDate($filter->getField(), '>=', $from->format('Y-m-d H:i:s'));
-        $query->whereDate($filter->getField(), '<=', $to->format('Y-m-d H:i:s'));
+        $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '>=', $from->format('Y-m-d H:i:s'));
+        $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '<=', $to->format('Y-m-d H:i:s'));
     }
 }
