@@ -219,12 +219,8 @@ class DatetimeFieldType extends FieldType
         $value = (new Carbon())->createFromFormat(
             $this->getPostFormat(),
             $value,
-            $this->configuration->get('streams::datetime.database_timezone')
+            array_get($this->getConfig(), 'timezone')
         );
-
-        if ($this->config('mode') !== 'date') {
-            $value->setTimezone(array_get($this->getConfig(), 'timezone'));
-        }
 
         return $value;
     }
