@@ -115,7 +115,7 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
-        $formats = $this->configuration->get('anomaly.field_type.datetime::formats.date', []);
+        $formats = $this->configuration->get('anomaly.field_type.datetime::formats.date');
 
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
