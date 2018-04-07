@@ -1,11 +1,13 @@
-$(document).on('ajaxComplete ready', function () {
+(function (window, document) {
+
+    let fields = Array.prototype.slice.call(
+        document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]')
+    );
 
     // Initialize inputs
-    $('input[data-provides="anomaly.field_type.datetime"]:not([data-initialized])').each(function () {
+    fields.forEach(function (field) {
 
-        var $this = $(this);
-
-        var options = {
+        let options = {
             mode: 'range',
             altInput: true,
             allowInput: true,
@@ -13,6 +15,6 @@ $(document).on('ajaxComplete ready', function () {
             dateFormat: $this.data('datetime-format')
         };
 
-        $this.attr('data-initialized', '').flatpickr(options);
+        field.flatpickr(options);
     });
-});
+})(window, document);

@@ -1,15 +1,16 @@
-$(document).on('ajaxComplete ready', function () {
+(function (window, document) {
+
+    let fields = Array.prototype.slice.call(
+        document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]')
+    );
 
     // Initialize inputs
-    $('input[data-provides="anomaly.field_type.datetime"]:not([data-initialized])').each(function () {
+    fields.forEach(function (field) {
 
-        var $this = $(this);
-
-        $this.attr('data-initialized', '')
-            .datetimeEntry({
-                spinnerImage: '',
-                timeSteps: [1, $this.data('step')],
-                datetimeFormat: $this.data('datetime-format')
-            });
+        $(field).datetimeEntry({
+            spinnerImage: '',
+            timeSteps: [1, field.getAttribute('data-step')],
+            datetimeFormat: field.getAttribute('data-datetime-format')
+        });
     });
-});
+})(window, document);
