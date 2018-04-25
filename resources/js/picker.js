@@ -10,6 +10,7 @@
         if (!field.getAttribute('readonly')) {
 
             let inputMode = field.getAttribute('data-input-mode');
+            let clearToggle = field.parentElement.querySelector('a[data-clear]');
 
             let options = {
                 altInput: true,
@@ -23,7 +24,17 @@
                 noCalendar: inputMode === 'time'
             };
 
-            field.flatpickr(options);
+            let picker = field.flatpickr(options);
+
+            if (clearToggle) {
+
+                clearToggle.addEventListener('click', function (event) {
+
+                    event.preventDefault();
+
+                    picker.clear();
+                });
+            }
         }
     });
 })(window, document);

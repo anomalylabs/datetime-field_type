@@ -11,6 +11,12 @@
 
 <div class="input-group">
 
+    {% if not field_type.readonly %}
+        <a href="#" class="input-group-addon" data-clear>
+            <i class="fa fa-times"></i>
+        </a>
+    {% endif %}
+
     <input
             type="text"
             class="form-control"
