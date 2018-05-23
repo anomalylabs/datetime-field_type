@@ -11,8 +11,8 @@
             mode: 'range',
             altInput: true,
             allowInput: true,
-            minuteIncrement: $this.data('step') || 1,
-            dateFormat: $this.data('datetime-format')
+            minuteIncrement: field.getAttribute('data-step') || 1,
+            dateFormat: field.getAttribute('data-datetime-format')
         };
 
         field.flatpickr(options);
