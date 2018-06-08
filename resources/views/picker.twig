@@ -1,7 +1,7 @@
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/flatpickr.min.js") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/flatpicker.scss") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/light.scss") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::scss/customize.scss") }}
+{{ asset_add("styles.css", "anomaly.field_type.datetime::scss/picker.scss") }}
 
 {% for locale in config('streams::locales.enabled') %}
     {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/l10n/" ~ locale ~ ".js", ["ignore"]) }}
