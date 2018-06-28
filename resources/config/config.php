@@ -19,15 +19,16 @@ return [
         'type' => 'anomaly.field_type.boolean',
     ],
     'date_format' => [
-        'type'     => 'anomaly.field_type.select',
         'required' => true,
+        'type'     => 'anomaly.field_type.select',
         'config'   => [
             'handler' => DateFormatHandler::class,
         ],
     ],
     'time_format' => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'required' => true,
+        'type'     => 'anomaly.field_type.select',
+        'config'   => [
             'handler' => TimeFormatHandler::class,
         ],
     ],
