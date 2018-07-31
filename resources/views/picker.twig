@@ -3,11 +3,13 @@
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/light.scss") }}
 {{ asset_add("styles.css", "anomaly.field_type.datetime::scss/picker.scss") }}
 
-{% for locale in config('streams::locales.enabled') %}
+{% for locale in config('streams::locales.enabled') if locale != 'en' %}
     {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/l10n/" ~ locale ~ ".js", ["ignore"]) }}
 {% endfor %}
 
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/l10n/" ~ config('app.locale') ~ ".js", ["ignore"]) }}
+{% if config('app.locale') != 'en' %}
+    {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/l10n/" ~ config('app.locale') ~ ".js", ["ignore"]) }}
+{% endif %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/picker.js") }}
 
