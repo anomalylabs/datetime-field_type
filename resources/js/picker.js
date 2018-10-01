@@ -1,7 +1,7 @@
 (function (window, document) {
 
     let fields = Array.prototype.slice.call(
-        document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]')
+        document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]:not(.flatpickr-input)')
     );
 
     // Initialize inputs
