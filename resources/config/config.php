@@ -1,8 +1,5 @@
 <?php
 
-use Anomaly\DatetimeFieldType\Support\Config\DateFormatHandler;
-use Anomaly\DatetimeFieldType\Support\Config\TimeFormatHandler;
-
 return [
     'mode'        => [
         'type'     => 'anomaly.field_type.select',
@@ -22,14 +19,14 @@ return [
         'required' => true,
         'type'     => 'anomaly.field_type.select',
         'config'   => [
-            'handler' => DateFormatHandler::class,
+            'handler' => \Anomaly\DatetimeFieldType\Support\Config\DateFormatHandler::class,
         ],
     ],
     'time_format' => [
         'required' => true,
         'type'     => 'anomaly.field_type.select',
         'config'   => [
-            'handler' => TimeFormatHandler::class,
+            'handler' => \Anomaly\DatetimeFieldType\Support\Config\TimeFormatHandler::class,
         ],
     ],
     'timezone'    => [
