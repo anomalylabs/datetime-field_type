@@ -91,7 +91,7 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository        $configuration
+     * @param Repository $configuration
      */
     public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
@@ -216,10 +216,8 @@ class DatetimeFieldType extends FieldType
             return null;
         }
 
-        $value = (new Carbon())->createFromFormat(
-            $this->getPostFormat(),
-            $value,
-            array_get($this->getConfig(), 'timezone')
+        $value = (new Carbon())->createFromTimestamp(
+            strtotime($value)
         );
 
         return $value;
