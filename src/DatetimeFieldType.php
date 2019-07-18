@@ -216,8 +216,14 @@ class DatetimeFieldType extends FieldType
             return null;
         }
 
-        $value = (new Carbon())->createFromTimestamp(
-            strtotime($value)
+//        $value = (new Carbon())->createFromTimestamp(
+//            strtotime($value)
+//        );
+
+        $value = (new Carbon())->createFromFormat(
+            $this->getPostFormat(),
+            $value,
+            array_get($this->getConfig(), 'timezone')
         );
 
         return $value;
