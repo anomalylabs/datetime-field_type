@@ -32,7 +32,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
     /**
      * Create a new DatetimeFieldTypeModifier instance.
      *
-     * @param Repository        $config
+     * @param Repository $config
      * @param DatetimeFieldType $fieldType
      */
     public function __construct(Repository $config, DatetimeFieldType $fieldType)
@@ -103,7 +103,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      * based on the value.
      *
      * @param              $value
-     * @param  null        $timezone
+     * @param  null $timezone
      * @return Carbon|null
      * @throws \Exception
      */

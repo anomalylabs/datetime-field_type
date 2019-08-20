@@ -22,13 +22,15 @@
     <input
             type="text"
             class="form-control"
+            data-datetime-format="Z"
             name="{{ field_type.input_name }}"
+            value="{{ field_type.format('c') }}"
             data-step="{{ field_type.config.step }}"
             data-input-mode="{{ field_type.config.mode }}"
+            data-timezone="{{ field_type.config.timezone }}"
             placeholder="{{ trans(field_type.placeholder) }}"
             data-locale="{{ field_type.locale ?: config('app.locale') }}"
-            value="{{ field_type.format(field_type.input_format) }}"
-            data-datetime-format="{{ field_type.input_format }}"
+            {#value="{{ field_type.format(field_type.input_format) }}"#}
             data-alt-format="{{ field_type.plugin_format }}"
             {{ html_attributes(field_type.attributes) }}
             {{ field_type.required ? 'required' }}

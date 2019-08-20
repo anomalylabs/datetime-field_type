@@ -75,7 +75,7 @@ class DatetimeConverter
      * Return the PHP equivalent
      * of the provided JS date string.
      *
-     * @param        $js
+     * @param $js
      * @param string $map
      * @return string
      */
@@ -99,9 +99,8 @@ class DatetimeConverter
 
     /**
      * Convert a string according to a map.
-     *
-     * @param         $string
-     * @param  array  $map
+     * @param $string
+     * @param array $map
      * @return string
      */
     protected function convert($string, array $map)

@@ -21,7 +21,15 @@
                 dateFormat: field.getAttribute('data-datetime-format'),
                 time_24hr: Boolean(field.getAttribute('data-alt-format').match(/[GH]/)),
                 enableTime: inputMode !== 'date',
-                noCalendar: inputMode === 'time'
+                noCalendar: inputMode === 'time',
+                onReady: function (datetime) {
+                    console.log(datetime.toLocaleString(
+                        field.getAttribute('data-locale'),
+                        {
+                            timeZone: field.getAttribute('data-datetime-format')
+                        })
+                    );
+                }
             };
 
             let picker = field.flatpickr(options);

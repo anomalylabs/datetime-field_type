@@ -1,6 +1,5 @@
 <?php namespace Anomaly\DatetimeFieldType\Validation;
 
-use Anomaly\DatetimeFieldType\DatetimeFieldType;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Carbon\Carbon;
 
@@ -22,18 +21,14 @@ class ValidateDatetime
      * @param $value
      * @return bool
      */
-    public function handle(FormBuilder $builder, $attribute, $value)
+    public function handle($value)
     {
-
         if (empty($value)) {
             return true;
         }
 
-        /* @var $fieldType DatetimeFieldType */
-        $fieldType = $builder->getFormFieldFromAttribute($attribute);
-
         try {
-            (new Carbon())->createFromFormat($fieldType->getPostFormat(), $value);
+            (new Carbon())->createFromTimestamp(strtotime($value));
         } catch (\Exception $e) {
             return false;
         }

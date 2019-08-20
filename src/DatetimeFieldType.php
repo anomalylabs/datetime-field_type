@@ -216,13 +216,8 @@ class DatetimeFieldType extends FieldType
             return null;
         }
 
-//        $value = (new Carbon())->createFromTimestamp(
-//            strtotime($value)
-//        );
-
-        $value = (new Carbon())->createFromFormat(
-            $this->getPostFormat(),
-            $value,
+        $value = (new Carbon())->createFromTimestamp(
+            strtotime($value),
             array_get($this->getConfig(), 'timezone')
         );
 
@@ -281,21 +276,6 @@ class DatetimeFieldType extends FieldType
         }
 
         throw new \Exception('Storage format can not be determined.');
-    }
-
-    /**
-     * Get the expected post
-     * format for validation.
-     *
-     * @return string
-     */
-    public function getPostFormat()
-    {
-        if ($this->config('picker')) {
-            return str_replace(':s', '', $this->getStorageFormat());
-        }
-
-        return $this->getDatetimeFormat();
     }
 
     /**
