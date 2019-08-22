@@ -1,5 +1,7 @@
 {
     "/resources/css/picker.css": "/resources/css/picker.css",
+    "/resources/js/moment.js": "/resources/js/moment.js",
+    "/resources/js/moment-timezone-with-data.js": "/resources/js/moment-timezone-with-data.js",
     "/resources/js/flatpickr.js": "/resources/js/flatpickr.js",
     "/resources/css/flatpickr.css": "/resources/css/flatpickr.css",
     "/resources/css/light.css": "/resources/css/light.css"

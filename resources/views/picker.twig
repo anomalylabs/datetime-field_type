@@ -40,7 +40,7 @@
             {{ field_type.readonly ? 'readonly' }}>
 
     {% if field_type.config.mode != 'date' %}
-        <span class="input-group-addon">
+        <span class="datetime__timezone input-group-addon">
             {{ field_type.config.timezone }}
         </span>
     {% endif %}
