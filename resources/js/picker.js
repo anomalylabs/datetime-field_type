@@ -4,6 +4,8 @@
         document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]:not(.flatpickr-input)')
     );
 
+    console.log();
+
     // Initialize inputs
     fields.forEach(function (field) {
 
@@ -17,19 +19,11 @@
                 allowInput: false,
                 locale: field.getAttribute('data-locale'),
                 altFormat: field.getAttribute('data-alt-format'),
+                altInputClass: 'flatpickr-input ' + field.className,
                 minuteIncrement: field.getAttribute('data-step') || 1,
-                dateFormat: field.getAttribute('data-datetime-format'),
                 time_24hr: Boolean(field.getAttribute('data-alt-format').match(/[GH]/)),
                 enableTime: inputMode !== 'date',
-                noCalendar: inputMode === 'time',
-                onReady: function (datetime) {
-                    console.log(datetime.toLocaleString(
-                        field.getAttribute('data-locale'),
-                        {
-                            timeZone: field.getAttribute('data-datetime-format')
-                        })
-                    );
-                }
+                noCalendar: inputMode === 'time'
             };
 
             let picker = field.flatpickr(options);

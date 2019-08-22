@@ -1,7 +1,11 @@
-{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/flatpickr.min.js") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::scss/flatpicker.scss") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::scss/light.scss") }}
-{{ asset_add("styles.css", "anomaly.field_type.datetime::scss/picker.scss") }}
+{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/flatpickr.js") }}
+
+{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/moment.js") }}
+{{ asset_add("scripts.js", "anomaly.field_type.datetime::js/moment-timezone-with-data.js") }}
+
+{{ asset_add("styles.css", "anomaly.field_type.datetime::css/flatpicker.css") }}
+{{ asset_add("styles.css", "anomaly.field_type.datetime::css/light.css") }}
+{{ asset_add("styles.css", "anomaly.field_type.datetime::css/picker.css") }}
 
 {% for locale in config('streams::locales.enabled') %}
     {{ asset_add("scripts.js", "anomaly.field_type.datetime::js/l10n/" ~ locale ~ ".js", ["ignore"]) }}
@@ -22,16 +26,14 @@
     <input
             type="text"
             class="form-control"
-            data-datetime-format="Z"
             name="{{ field_type.input_name }}"
-            value="{{ field_type.format('c') }}"
             data-step="{{ field_type.config.step }}"
             data-input-mode="{{ field_type.config.mode }}"
-            data-timezone="{{ field_type.config.timezone }}"
-            placeholder="{{ trans(field_type.placeholder) }}"
-            data-locale="{{ field_type.locale ?: config('app.locale') }}"
-            {#value="{{ field_type.format(field_type.input_format) }}"#}
             data-alt-format="{{ field_type.plugin_format }}"
+            placeholder="{{ trans(field_type.placeholder) }}"
+            data-value="{{ field_type.format(field_type.input_format) }}"
+            value="{{ field_type.format(field_type.input_format) }}"
+            data-locale="{{ field_type.locale ?: config('app.locale') }}"
             {{ html_attributes(field_type.attributes) }}
             {{ field_type.required ? 'required' }}
             {{ field_type.disabled ? 'disabled' }}

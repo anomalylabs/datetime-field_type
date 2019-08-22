@@ -24,7 +24,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the value.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function format($format = null)
@@ -51,7 +51,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the date.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function date($format = null)
@@ -66,7 +66,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the time.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function time($format = null)
@@ -81,7 +81,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the value in user format.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function local($format = null)
@@ -100,7 +100,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the "time ago" formatted string.
+     * Return the 'time ago' formatted string.
      *
      * @return null|string
      */
@@ -136,10 +136,20 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Return the ISO8601 formatted datetime.
+     *
+     * @return null|string
+     */
+    public function atom()
+    {
+        return $this->format('Y-m-dTH:i:s.000\Z');
+    }
+
+    /**
      * Try mapping missing methods to Carbon.
      *
      * @param  string $method
-     * @param  array  $arguments
+     * @param  array $arguments
      * @return mixed
      */
     public function __call($method, $arguments)
