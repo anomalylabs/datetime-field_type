@@ -12,9 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix
-    .copy('node_modules/moment/moment.js', 'resources/js')
-    .copy('node_modules/moment-timezone/builds/moment-timezone-with-data.js', 'resources/js')
-
     .copy('node_modules/flatpickr/dist/l10n', 'resources/js/l10n')
     .copy('node_modules/flatpickr/dist/flatpickr.js', 'resources/js')
     .copy('node_modules/flatpickr/dist/flatpickr.css', 'resources/css')

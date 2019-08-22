@@ -11,16 +11,9 @@
 
             let inputMode = field.getAttribute('data-input-mode');
             let clearToggle = field.parentElement.querySelector('a[data-clear]');
-            let timezone = field.parentElement.querySelector('.datetime__timezone');
 
-            if (timezone.innerText !== moment.tz.guess()) {
-
-                console.log('The value should be entered as "' + timezone.innerText
-                    + '" and it appears that you are in "'
-                    + moment.tz.guess() + '". Mind your offset!');
-
-                timezone.classList.add('datetime__timezone--warning');
-            }
+            console.log('Data-Value: ' + field.dataset.value);
+            console.log('Value (Pre-Flatpickr): ' + field.dataset.value);
 
             let options = {
                 altInput: true,
@@ -35,6 +28,8 @@
             };
 
             let picker = field.flatpickr(options);
+
+            console.log('Value (Flatpickr): ' + field.dataset.value);
 
             if (clearToggle) {
 

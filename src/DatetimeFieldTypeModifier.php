@@ -8,9 +8,9 @@ use Illuminate\Contracts\Config\Repository;
 /**
  * Class DatetimeFieldTypeModifier
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class DatetimeFieldTypeModifier extends FieldTypeModifier
 {

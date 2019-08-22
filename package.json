@@ -15,7 +15,6 @@
         "flatpickr": "^4.6.2",
         "sass-loader": "^7.1.0",
         "laravel-mix": "^4.0.12",
-        "moment-timezone": "^0.5.26",
         "resolve-url-loader": "^2.3.1"
     }
 }
