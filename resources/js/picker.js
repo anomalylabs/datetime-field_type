@@ -12,9 +12,6 @@
             let inputMode = field.getAttribute('data-input-mode');
             let clearToggle = field.parentElement.querySelector('a[data-clear]');
 
-            console.log('Data-Value: ' + field.dataset.value);
-            console.log('Value (Pre-Flatpickr): ' + field.dataset.value);
-
             let options = {
                 altInput: true,
                 allowInput: false,
@@ -28,8 +25,6 @@
             };
 
             let picker = field.flatpickr(options);
-
-            console.log('Value (Flatpickr): ' + field.dataset.value);
 
             if (clearToggle) {
 
