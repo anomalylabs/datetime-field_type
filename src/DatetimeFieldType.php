@@ -112,6 +112,11 @@ class DatetimeFieldType extends FieldType
     public function getRules()
     {
         $rules = parent::getRules();
+        
+        // If the locale is not the default locale, allow the value to be null
+        if ($this->locale != config('streams::locales.default')) {
+            $rules[] = 'nullable';
+        }
 
         // We expect an array.
         $rules[] = 'array';
