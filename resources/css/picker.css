@@ -16,22 +16,26 @@
 .datetime-field_type .flatpickr-day.selected.nextMonthDay,
 .datetime-field_type .flatpickr-day.startRange.nextMonthDay,
 .datetime-field_type .flatpickr-day.endRange.nextMonthDay {
-  background: #b21cc3;
-  border-color: #b21cc3;
+    background: #b21cc3;
+    border-color: #b21cc3;
 }
+
 .datetime-field_type .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
 .datetime-field_type .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
 .datetime-field_type .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
-  box-shadow: -10px 0 0 #b21cc3;
+    box-shadow: -10px 0 0 #b21cc3;
 }
+
 .datetime-field_type .flatpickr-day.week.selected {
-  box-shadow: -5px 0 0 #b21cc3, 5px 0 0 #b21cc3;
+    box-shadow: -5px 0 0 #b21cc3, 5px 0 0 #b21cc3;
 }
+
 .datetime-field_type .flatpickr-input[readonly] {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
+
 .datetime-field_type .datetime__timezone.datetime__timezone--warning {
-  color: #ffffff;
-  font-weight: bold;
-  background: #ff3160;
+    color: #ffffff;
+    font-weight: bold;
+    background: #ff3160;
 }

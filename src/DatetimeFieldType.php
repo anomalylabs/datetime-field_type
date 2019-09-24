@@ -4,7 +4,7 @@ use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Carbon\Carbon;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class DatetimeFieldType
@@ -74,13 +74,6 @@ class DatetimeFieldType extends FieldType
     ];
 
     /**
-     * The configuration repository.
-     *
-     * @var Repository
-     */
-    protected $configuration;
-
-    /**
      * The converter utility.
      *
      * @var DatetimeConverter
@@ -91,63 +84,10 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository $configuration
      */
-    public function __construct(DatetimeConverter $converter, Repository $configuration)
+    public function __construct(DatetimeConverter $converter)
     {
-        $this->converter     = $converter;
-        $this->configuration = $configuration;
-    }
-
-    /**
-     * Get the config.
-     *
-     * @return array
-     */
-    public function getConfig()
-    {
-        $config = parent::getConfig();
-
-        $timezones = array_map(
-            function ($timezone) {
-                return strtolower($timezone);
-            },
-            timezone_identifiers_list()
-        );
-
-        $formats = $this->configuration->get('anomaly.field_type.datetime::formats.date');
-
-        // Check for default / erroneous timezone.
-        if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
-            $config['timezone'] = $this->configuration->get('app.timezone');
-        }
-
-        // Default date format.
-        if (!$config['date_format']) {
-            $config['date_format'] = $this->configuration->get('streams::datetime.date_format');
-        }
-
-        // Default time format.
-        if (!$config['time_format']) {
-            $config['time_format'] = $this->configuration->get('streams::datetime.time_format');
-        }
-
-        // Make sure format is supported.
-        if (!in_array($config['date_format'], array_keys($formats))) {
-            $config['date_format'] = array_first(array_keys($formats));
-        }
-
-        return $config;
-    }
-
-    /**
-     * Get the column type.
-     *
-     * @return string
-     */
-    public function getColumnType()
-    {
-        return array_get($this->config, 'mode');
+        $this->converter = $converter;
     }
 
     /**
@@ -180,13 +120,44 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Return the conversion map to use.
+     * Get the config.
      *
-     * @return string
+     * @return array
      */
-    public function converterMap()
+    public function getConfig()
     {
-        return $this->isPicker() ? 'picker' : 'default';
+        $config = parent::getConfig();
+
+        $timezones = array_map(
+            function ($timezone) {
+                return strtolower($timezone);
+            },
+            timezone_identifiers_list()
+        );
+
+        $formats = config('anomaly.field_type.datetime::formats.date');
+
+        // Check for default / erroneous timezone.
+        if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
+            $config['timezone'] = config('app.timezone');
+        }
+
+        // Default date format.
+        if (!$config['date_format']) {
+            $config['date_format'] = config('streams::datetime.date_format');
+        }
+
+        // Default time format.
+        if (!$config['time_format']) {
+            $config['time_format'] = config('streams::datetime.time_format');
+        }
+
+        // Make sure format is supported.
+        if (!in_array($config['date_format'], array_keys($formats))) {
+            $config['date_format'] = array_first(array_keys($formats));
+        }
+
+        return $config;
     }
 
     /**
@@ -202,6 +173,36 @@ class DatetimeFieldType extends FieldType
             $this->getDatetimeFormat($mode),
             $this->converterMap()
         );
+    }
+
+    /**
+     * Get the post format.
+     *
+     * @param $mode
+     * @return string
+     */
+    public function getDatetimeFormat($mode = null)
+    {
+        $mode = $mode ?: array_get($this->getConfig(), 'mode');
+
+        $date = array_get($this->getConfig(), 'date_format');
+        $time = array_get($this->getConfig(), 'time_format');
+
+        if ($mode === 'datetime') {
+            return $date . ' ' . $time;
+        }
+
+        return $mode === 'date' ? $date : $time;
+    }
+
+    /**
+     * Return the conversion map to use.
+     *
+     * @return string
+     */
+    public function converterMap()
+    {
+        return $this->isPicker() ? 'picker' : 'default';
     }
 
     /**
@@ -240,26 +241,6 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
-     * Get the post format.
-     *
-     * @param $mode
-     * @return string
-     */
-    public function getDatetimeFormat($mode = null)
-    {
-        $mode = $mode ?: array_get($this->getConfig(), 'mode');
-
-        $date = array_get($this->getConfig(), 'date_format');
-        $time = array_get($this->getConfig(), 'time_format');
-
-        if ($mode === 'datetime') {
-            return $date . ' ' . $time;
-        }
-
-        return $mode === 'date' ? $date : $time;
-    }
-
-    /**
      * Get the storage format.
      *
      * @return string
@@ -277,6 +258,16 @@ class DatetimeFieldType extends FieldType
         }
 
         throw new \Exception('Storage format can not be determined.');
+    }
+
+    /**
+     * Get the column type.
+     *
+     * @return string
+     */
+    public function getColumnType()
+    {
+        return array_get($this->config, 'mode');
     }
 
     /**

@@ -3,7 +3,7 @@
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Anomaly\Streams\Platform\Model\Variables\VariablesTestingEntryModel;
 use Carbon\Carbon;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class DatetimeFieldTypeModifier
@@ -24,21 +24,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
     protected $fieldType;
 
     /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
      * Create a new DatetimeFieldTypeModifier instance.
      *
-     * @param Repository $config
      * @param DatetimeFieldType $fieldType
      */
-    public function __construct(Repository $config, DatetimeFieldType $fieldType)
+    public function __construct(DatetimeFieldType $fieldType)
     {
-        $this->config    = $config;
         $this->fieldType = $fieldType;
     }
 
@@ -59,45 +50,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone($this->config->get('streams::datetime.database_timezone'));
-        }
-
-        return $value;
-    }
-
-    /**
-     * Restore the value.
-     *
-     * @param $value
-     * @return Carbon
-     */
-    public function restore($value)
-    {
-        if (!$value) {
-            return null;
-        }
-
-        if (!$value instanceof \DateTime) {
-            try {
-                $value = (new Carbon())->createFromFormat(
-                    $this->fieldType->getStorageFormat(),
-                    $value,
-                    $this->config->get('streams::datetime.database_timezone')
-                );
-            } catch (\Exception $e) {
-                $value = (new Carbon())->createFromTimestamp(
-                    strtotime($value),
-                    $this->config->get('streams::datetime.database_timezone')
-                );
-            }
-        }
-
-        if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
-        }
-
-        if ($this->fieldType->getEntry() instanceof VariablesTestingEntryModel) {
-            //dd($value->setTimezone($this->config->get('streams::datetime.database_timezone')));
+            $value->setTimezone(config('streams::datetime.database_timezone'));
         }
 
         return $value;
@@ -131,5 +84,39 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         } catch (\Exception $e) {
             return (new Carbon())->createFromTimestamp(strtotime($value), $timezone);
         }
+    }
+
+    /**
+     * Restore the value.
+     *
+     * @param $value
+     * @return Carbon
+     */
+    public function restore($value)
+    {
+        if (!$value) {
+            return null;
+        }
+
+        if (!$value instanceof \DateTime) {
+            try {
+                $value = (new Carbon())->createFromFormat(
+                    $this->fieldType->getStorageFormat(),
+                    $value,
+                    config('streams::datetime.database_timezone')
+                );
+            } catch (\Exception $e) {
+                $value = (new Carbon())->createFromTimestamp(
+                    strtotime($value),
+                    config('streams::datetime.database_timezone')
+                );
+            }
+        }
+
+        if ($this->fieldType->config('mode') !== 'date') {
+            $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
+        }
+
+        return $value;
     }
 }

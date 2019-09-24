@@ -1,7 +1,7 @@
 <?php namespace Anomaly\DatetimeFieldType\Support\Config;
 
 use Anomaly\SelectFieldType\SelectFieldType;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class TimeFormatHandler
@@ -21,6 +21,6 @@ class TimeFormatHandler
      */
     public function handle(SelectFieldType $fieldType, Repository $config)
     {
-        $fieldType->setOptions($config->get('anomaly.field_type.datetime::formats.time'));
+        $fieldType->setOptions(config('anomaly.field_type.datetime::formats.time'));
     }
 }

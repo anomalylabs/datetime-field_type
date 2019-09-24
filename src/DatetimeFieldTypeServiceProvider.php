@@ -20,5 +20,4 @@ class DatetimeFieldTypeServiceProvider extends AddonServiceProvider
     protected $singletons = [
         'Anomaly\DatetimeFieldType\DatetimeFieldTypeModifier' => 'Anomaly\DatetimeFieldType\DatetimeFieldTypeModifier',
     ];
-
 }

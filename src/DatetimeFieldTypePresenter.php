@@ -22,9 +22,24 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     protected $object;
 
     /**
+     * Format the date.
+     *
+     * @param  null $format
+     * @return null|string
+     */
+    public function date($format = null)
+    {
+        if (!$format) {
+            $format = $this->object->getOutputFormat('date');
+        }
+
+        return $this->format($format);
+    }
+
+    /**
      * Format the value.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function format($format = null)
@@ -49,24 +64,9 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Format the date.
-     *
-     * @param  null        $format
-     * @return null|string
-     */
-    public function date($format = null)
-    {
-        if (!$format) {
-            $format = $this->object->getOutputFormat('date');
-        }
-
-        return $this->format($format);
-    }
-
-    /**
      * Format the time.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function time($format = null)
@@ -81,7 +81,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     /**
      * Format the value in user format.
      *
-     * @param  null        $format
+     * @param  null $format
      * @return null|string
      */
     public function local($format = null)
@@ -139,7 +139,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      * Try mapping missing methods to Carbon.
      *
      * @param  string $method
-     * @param  array  $arguments
+     * @param  array $arguments
      * @return mixed
      */
     public function __call($method, $arguments)

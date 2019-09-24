@@ -85,20 +85,8 @@ class DatetimeConverter
     }
 
     /**
-     * Return the JS equivalent
-     * of the provided PHP date string.
-     *
-     * @param        $php
-     * @param string $map
-     * @return string
-     */
-    public function toJs($php, $map = 'default')
-    {
-        return $this->convert($php, $this->maps[$map]);
-    }
-
-    /**
      * Convert a string according to a map.
+     *
      * @param $string
      * @param array $map
      * @return string
@@ -115,13 +103,11 @@ class DatetimeConverter
         $string = str_split($string . ' ');
 
         for ($i = 0; $i < count($string); $i++) {
-
             $char = $string[$i];
 
             // If it's not a valid character we
             // can process the stack.
             if (preg_match('/[^A-Za-z0-9]+/', $char)) {
-
                 $converted .= array_get($map, $stack) . $char;
 
                 $stack = '';
@@ -133,5 +119,18 @@ class DatetimeConverter
         }
 
         return trim($converted);
+    }
+
+    /**
+     * Return the JS equivalent
+     * of the provided PHP date string.
+     *
+     * @param        $php
+     * @param string $map
+     * @return string
+     */
+    public function toJs($php, $map = 'default')
+    {
+        return $this->convert($php, $this->maps[$map]);
     }
 }
