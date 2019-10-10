@@ -9,8 +9,7 @@
     ],
     "homepage": "http://pyrocms.com/",
     "license": "MIT",
-    "authors": [
-        {
+    "authors": [{
             "name": "PyroCMS, Inc.",
             "email": "support@pyrocms.com",
             "homepage": "http://pyrocms.com/",
@@ -32,6 +31,13 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\DatetimeFieldType\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anomaly\\DatetimeFieldType\\DatetimeFieldTypeServiceProvider"
+            ]
         }
     }
 }
