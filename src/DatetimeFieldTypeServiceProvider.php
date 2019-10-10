@@ -1,23 +1,24 @@
-<?php namespace Anomaly\DatetimeFieldType;
+<?php
+
+namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class DatetimeFieldTypeServiceProvider
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class DatetimeFieldTypeServiceProvider extends AddonServiceProvider
+class DatetimeFieldTypeServiceProvider extends AddonServiceProvider implements DeferrableProvider
 {
 
     /**
-     * The singleton bindings.
-     *
-     * @var array
+     * Return the provided services.
      */
-    protected $singletons = [
-        'Anomaly\DatetimeFieldType\DatetimeFieldTypeModifier' => 'Anomaly\DatetimeFieldType\DatetimeFieldTypeModifier',
-    ];
+    public function provides()
+    {
+        return [DatetimeFieldType::class];
+    }
 }
