@@ -19,6 +19,6 @@ class DatetimeFieldTypeServiceProvider extends AddonServiceProvider implements D
      */
     public function provides()
     {
-        return [DatetimeFieldType::class];
+        return [DatetimeFieldType::class, 'anomaly.field_type.datetime'];
     }
 }
