@@ -1,4 +1,6 @@
-<?php namespace Anomaly\DatetimeFieldType\Support\Config;
+<?php
+
+namespace Anomaly\DatetimeFieldType\Support\Config;
 
 use Anomaly\SelectFieldType\SelectFieldType;
 
@@ -21,6 +23,6 @@ class DateFormatHandler
      */
     public function handle(SelectFieldType $fieldType, Repository $config)
     {
-        $fieldType->setOptions(config('anomaly.field_type.datetime::formats.date'));
+        $fieldType->setOptions(config('datetime.format.date'));
     }
 }

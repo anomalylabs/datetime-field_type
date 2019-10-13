@@ -1,4 +1,6 @@
-<?php namespace Anomaly\DatetimeFieldType;
+<?php
+
+namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
@@ -135,7 +137,7 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
-        $formats = config('anomaly.field_type.datetime::formats.date');
+        $formats = config('datetime.format.date');
 
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
@@ -281,14 +283,14 @@ class DatetimeFieldType extends FieldType
         switch ($output ?: $this->getColumnType()) {
             case 'datetime':
                 return array_get(
-                        $this->getConfig(),
-                        'date_format',
-                        config('streams::datetime.date_format')
-                    ) . ' ' . array_get(
-                        $this->getConfig(),
-                        'time_format',
-                        config('streams::datetime.time_format')
-                    );
+                    $this->getConfig(),
+                    'date_format',
+                    config('streams::datetime.date_format')
+                ) . ' ' . array_get(
+                    $this->getConfig(),
+                    'time_format',
+                    config('streams::datetime.time_format')
+                );
             case 'date':
                 return array_get($this->getConfig(), 'date_format', config('streams::datetime.date_format'));
             case 'time':
