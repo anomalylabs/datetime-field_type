@@ -319,4 +319,26 @@ class DatetimeFieldType extends FieldType
 
         return $placeholder;
     }
+
+    /**
+     * Get the attributes.
+     *
+     * @param array $attributes
+     * @return array
+     */
+    public function attributes(array $attributes = [])
+    {
+        return array_filter(
+            array_merge(
+                parent::attributes(),
+                [
+                    'type' => 'text',
+                    'data-input-mode' => 'range',
+                    'data-datetime-format' => config('streams::datetime.date_format'),
+                ],
+                $this->getAttributes(),
+                $attributes
+            )
+        );
+    }
 }
