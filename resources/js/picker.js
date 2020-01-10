@@ -1,4 +1,4 @@
-(function (window, document) {
+(function () {
 
     let fields = Array.prototype.slice.call(
         document.querySelectorAll('input[data-provides="anomaly.field_type.datetime"]:not(.flatpickr-input)')
@@ -37,4 +37,4 @@
             }
         }
     });
-})(window, document);
+});

@@ -171,7 +171,7 @@ class DatetimeFieldType extends FieldType
      */
     public function getPluginFormat($mode = null)
     {
-        return $this->converter->toJs(
+        return DatetimeConverter::toJs(
             $this->getDatetimeFormat($mode),
             $this->converterMap()
         );
@@ -236,7 +236,7 @@ class DatetimeFieldType extends FieldType
      */
     public function getInputFormat()
     {
-        return $this->converter->toJs(
+        return DatetimeConverter::toJs(
             str_replace(':s', '', $this->getStorageFormat()),
             $this->converterMap()
         );

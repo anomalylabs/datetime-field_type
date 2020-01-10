@@ -1,4 +1,6 @@
-<?php namespace Anomaly\DatetimeFieldType\Support;
+<?php
+
+namespace Anomaly\DatetimeFieldType\Support;
 
 /**
  * Class DatetimeConverter
@@ -17,7 +19,7 @@ class DatetimeConverter
      *
      * @var array
      */
-    protected $maps = [
+    protected static $maps = [
         'default' => [
             // AM/PM
             'A' => 'a',
@@ -79,9 +81,9 @@ class DatetimeConverter
      * @param string $map
      * @return string
      */
-    public function toPhp($js, $map = 'default')
+    public static function toPhp($js, $map = 'default')
     {
-        return $this->convert($js, array_flip($this->maps[$map]));
+        return self::convert($js, array_flip(self::$maps[$map]));
     }
 
     /**
@@ -91,7 +93,7 @@ class DatetimeConverter
      * @param array $map
      * @return string
      */
-    protected function convert($string, array $map)
+    protected static function convert($string, array $map)
     {
         $stack     = '';
         $converted = '';
@@ -129,8 +131,8 @@ class DatetimeConverter
      * @param string $map
      * @return string
      */
-    public function toJs($php, $map = 'default')
+    public static function toJs($php, $map = 'default')
     {
-        return $this->convert($php, $this->maps[$map]);
+        return self::convert($php, self::$maps[$map]);
     }
 }
