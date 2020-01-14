@@ -1,14 +1,14 @@
 <?php
 
-use Anomaly\MultipleFieldType\MultipleFieldType;
+use Anomaly\DatetimeFieldType\DatetimeFieldType;
 
-class MultipleFieldTypeTest extends TestCase
+class DatetimeFieldTypeTest extends TestCase
 {
 
     public function testResolvable()
     {
-        $fieldType = app(MultipleFieldType::class);
+        $fieldType = app(DatetimeFieldType::class);
 
-        $this->assertTrue($fieldType instanceof MultipleFieldType);
+        $this->assertTrue($fieldType instanceof DatetimeFieldType);
     }
 }
