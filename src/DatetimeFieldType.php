@@ -137,7 +137,7 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
-        $formats = config('streams::datetime.date_format', []);
+        $formats = config('datetime.format.date');
 
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
