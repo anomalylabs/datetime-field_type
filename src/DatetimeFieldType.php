@@ -328,6 +328,8 @@ class DatetimeFieldType extends FieldType
      */
     public function attributes(array $attributes = [])
     {
+        $value = $this->getValue();
+        
         return array_filter(
             array_merge(
                 parent::attributes(),
@@ -335,6 +337,14 @@ class DatetimeFieldType extends FieldType
                     'type' => 'text',
                     'data-input-mode' => 'range',
                     'data-datetime-format' => config('streams::datetime.date_format'),
+
+                    'data-step' => $this->config('step'),
+                    'data-input-mode' => $this->config('mode'),
+                    'data-alt-format' => $this->getPluginFormat(),
+                    'data-input-format' => $this->getInputFormat(),
+                    'data-value' => $value ? $value->format($this->getInputFormat()) : null,
+                    'value' => $value ? $value->format($this->getInputFormat()) : null,
+                    'data-locale' => $this->locale ?: config('app.locale'),
                 ],
                 $this->getAttributes(),
                 $attributes
