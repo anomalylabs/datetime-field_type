@@ -146,12 +146,12 @@ class DatetimeFieldType extends FieldType
 
         // Default date format.
         if (!$config['date_format']) {
-            $config['date_format'] = config('streams::datetime.date_format');
+            $config['date_format'] = config('streams.datetime.date_format');
         }
 
         // Default time format.
         if (!$config['time_format']) {
-            $config['time_format'] = config('streams::datetime.time_format');
+            $config['time_format'] = config('streams.datetime.time_format');
         }
 
         // Make sure format is supported.
@@ -285,16 +285,16 @@ class DatetimeFieldType extends FieldType
                 return array_get(
                     $this->getConfig(),
                     'date_format',
-                    config('streams::datetime.date_format')
+                    config('streams.datetime.date_format')
                 ) . ' ' . array_get(
                     $this->getConfig(),
                     'time_format',
-                    config('streams::datetime.time_format')
+                    config('streams.datetime.time_format')
                 );
             case 'date':
-                return array_get($this->getConfig(), 'date_format', config('streams::datetime.date_format'));
+                return array_get($this->getConfig(), 'date_format', config('streams.datetime.date_format'));
             case 'time':
-                return array_get($this->getConfig(), 'time_format', config('streams::datetime.time_format'));
+                return array_get($this->getConfig(), 'time_format', config('streams.datetime.time_format'));
         }
 
         return null;
@@ -336,7 +336,7 @@ class DatetimeFieldType extends FieldType
                 [
                     'type' => 'text',
                     'data-input-mode' => 'range',
-                    'data-datetime-format' => config('streams::datetime.date_format'),
+                    'data-datetime-format' => config('streams.datetime.date_format'),
 
                     'data-step' => $this->config('step'),
                     'data-input-mode' => $this->config('mode'),

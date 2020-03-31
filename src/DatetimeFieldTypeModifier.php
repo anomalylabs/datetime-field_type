@@ -50,7 +50,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone(config('streams::datetime.database_timezone'));
+            $value->setTimezone(config('streams.datetime.database_timezone'));
         }
 
         return $value;
@@ -103,12 +103,12 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
                 $value = (new Carbon())->createFromFormat(
                     $this->fieldType->getStorageFormat(),
                     $value,
-                    config('streams::datetime.database_timezone')
+                    config('streams.datetime.database_timezone')
                 );
             } catch (\Exception $e) {
                 $value = (new Carbon())->createFromTimestamp(
                     strtotime($value),
-                    config('streams::datetime.database_timezone')
+                    config('streams.datetime.database_timezone')
                 );
             }
         }

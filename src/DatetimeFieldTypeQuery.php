@@ -35,15 +35,15 @@ class DatetimeFieldTypeQuery extends FieldTypeQuery
 
         list($from, $to) = explode(' to ', $filter->getValue());
 
-        $from = Carbon::createFromFormat(config('streams::datetime.date_format'), $from)
+        $from = Carbon::createFromFormat(config('streams.datetime.date_format'), $from)
             ->setTimezone(config('app.timezone'))
             ->setTime(0, 0, 0)// Start at the beginning of the day.
-            ->setTimezone(config('streams::datetime.default_timezone'));
+            ->setTimezone(config('streams.datetime.default_timezone'));
 
-        $to = Carbon::createFromFormat(config('streams::datetime.date_format'), $to)
+        $to = Carbon::createFromFormat(config('streams.datetime.date_format'), $to)
             ->setTimezone(config('app.timezone'))
             ->setTime(23, 59, 59)// Include up to the end of the day.
-            ->setTimezone(config('streams::datetime.default_timezone'));
+            ->setTimezone(config('streams.datetime.default_timezone'));
 
         $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '>=', $from->format('Y-m-d H:i:s'));
         $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '<=', $to->format('Y-m-d H:i:s'));
