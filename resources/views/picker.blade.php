@@ -14,7 +14,7 @@
 
 <div class="input-group">
 
-    @if ($fieldType->isReadonly())
+    @if ($fieldType->readonly)
     <a href="#" class="input-group-addon" data-clear>
         <i class="fa fa-times"></i>
     </a>
