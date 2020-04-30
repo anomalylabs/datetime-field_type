@@ -54,7 +54,7 @@ class DatetimeFieldType extends FieldType
      *
      * @var array
      */
-    protected $validators = [
+    public $validators = [
         'datetime' => [
             'handler' => ValidateDatetime::class,
             'message' => 'The date/time format is invalid.',
