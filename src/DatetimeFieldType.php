@@ -66,7 +66,7 @@ class DatetimeFieldType extends FieldType
      *
      * @var array
      */
-    protected $config = [
+    public $config = [
         'mode'        => 'datetime',
         'picker'      => true,
         'date_format' => null,
