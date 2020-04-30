@@ -27,11 +27,11 @@ class DatetimeFieldType extends FieldType
     protected $columnType = 'datetime';
 
     /**
-     * The field type rules.
+     * Validation rules.
      *
      * @var array
      */
-    protected $rules = [
+    public $rules = [
         'datetime',
     ];
 
@@ -329,7 +329,7 @@ class DatetimeFieldType extends FieldType
     public function attributes(array $attributes = [])
     {
         $value = $this->getValue();
-        
+
         return array_filter(
             array_merge(
                 parent::attributes(),
