@@ -2,6 +2,8 @@
 
 namespace Anomaly\DatetimeFieldType\Support;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class DatetimeConverter
  *
@@ -110,7 +112,7 @@ class DatetimeConverter
             // If it's not a valid character we
             // can process the stack.
             if (preg_match('/[^A-Za-z0-9]+/', $char)) {
-                $converted .= array_get($map, $stack) . $char;
+                $converted .= Arr::get($map, $stack) . $char;
 
                 $stack = '';
 

@@ -1,8 +1,9 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Anomaly\Streams\Platform\Model\Variables\VariablesTestingEntryModel;
-use Carbon\Carbon;
 
 
 /**
@@ -46,7 +47,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if (!$value instanceof \DateTime) {
-            $value = $this->toCarbon($value, array_get($this->fieldType->getConfig(), 'timezone'));
+            $value = $this->toCarbon($value, Arr::get($this->fieldType->getConfig(), 'timezone'));
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
@@ -114,7 +115,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         }
 
         if ($this->fieldType->config('mode') !== 'date') {
-            $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
+            $value->setTimezone(Arr::get($this->fieldType->getConfig(), 'timezone'));
         }
 
         return $value;

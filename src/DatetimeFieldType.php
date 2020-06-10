@@ -2,10 +2,11 @@
 
 namespace Anomaly\DatetimeFieldType;
 
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Carbon\Carbon;
 
 
 /**
@@ -118,7 +119,7 @@ class DatetimeFieldType extends FieldType
      */
     public function isPicker()
     {
-        return array_get($this->getConfig(), 'picker') == true;
+        return Arr::get($this->getConfig(), 'picker') == true;
     }
 
     /**
@@ -140,7 +141,7 @@ class DatetimeFieldType extends FieldType
         $formats = config('datetime.format.date');
 
         // Check for default / erroneous timezone.
-        if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
+        if ((!$timezone = strtolower(Arr::get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
             $config['timezone'] = config('app.timezone');
         }
 
@@ -185,10 +186,10 @@ class DatetimeFieldType extends FieldType
      */
     public function getDatetimeFormat($mode = null)
     {
-        $mode = $mode ?: array_get($this->getConfig(), 'mode');
+        $mode = $mode ?: Arr::get($this->getConfig(), 'mode');
 
-        $date = array_get($this->getConfig(), 'date_format');
-        $time = array_get($this->getConfig(), 'time_format');
+        $date = Arr::get($this->getConfig(), 'date_format');
+        $time = Arr::get($this->getConfig(), 'time_format');
 
         if ($mode === 'datetime') {
             return $date . ' ' . $time;
@@ -222,7 +223,7 @@ class DatetimeFieldType extends FieldType
         $value = (new Carbon())->createFromFormat(
             $this->getInputFormat(),
             $value,
-            array_get($this->getConfig(), 'timezone')
+            Arr::get($this->getConfig(), 'timezone')
         );
 
         return $value;
@@ -269,7 +270,7 @@ class DatetimeFieldType extends FieldType
      */
     public function getColumnType()
     {
-        return array_get($this->config, 'mode');
+        return Arr::get($this->config, 'mode');
     }
 
     /**
@@ -282,19 +283,19 @@ class DatetimeFieldType extends FieldType
     {
         switch ($output ?: $this->getColumnType()) {
             case 'datetime':
-                return array_get(
+                return Arr::get(
                     $this->getConfig(),
                     'date_format',
                     config('streams.datetime.date_format')
-                ) . ' ' . array_get(
+                ) . ' ' . Arr::get(
                     $this->getConfig(),
                     'time_format',
                     config('streams.datetime.time_format')
                 );
             case 'date':
-                return array_get($this->getConfig(), 'date_format', config('streams.datetime.date_format'));
+                return Arr::get($this->getConfig(), 'date_format', config('streams.datetime.date_format'));
             case 'time':
-                return array_get($this->getConfig(), 'time_format', config('streams.datetime.time_format'));
+                return Arr::get($this->getConfig(), 'time_format', config('streams.datetime.time_format'));
         }
 
         return null;
