@@ -145,7 +145,7 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
     public function __call($method, $arguments)
     {    
         // Check if carbon has the method.
-        if (is_string($value = $this->object->getValue()) && method_exists($value = $tmp, $method)) {
+        if (is_string($value = $this->object->getValue()) && method_exists($value, $method)) {
             return call_user_func_array([$value, $method], $arguments);
         }
 
