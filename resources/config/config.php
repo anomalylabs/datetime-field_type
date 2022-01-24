@@ -12,26 +12,27 @@ return [
             ],
         ],
     ],
+    'picker'      => [
+        'type' => 'anomaly.field_type.boolean',
+    ],
     'date_format' => [
-        'type'     => 'anomaly.field_type.select',
         'required' => true,
+        'type'     => 'anomaly.field_type.select',
         'config'   => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-                return $config->get('anomaly.field_type.datetime::formats.date');
-            },
+            'handler' => \Anomaly\DatetimeFieldType\Support\Config\DateFormatHandler::class,
         ],
     ],
     'time_format' => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-                return $config->get('anomaly.field_type.datetime::formats.time');
-            },
+        'required' => true,
+        'type'     => 'anomaly.field_type.select',
+        'config'   => [
+            'handler' => \Anomaly\DatetimeFieldType\Support\Config\TimeFormatHandler::class,
         ],
     ],
     'timezone'    => [
         'type'   => 'anomaly.field_type.select',
         'config' => [
+            'mode'    => 'search',
             'handler' => 'timezones',
         ],
     ],

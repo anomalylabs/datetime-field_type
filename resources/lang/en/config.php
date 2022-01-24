@@ -8,6 +8,11 @@ return [
         'date'         => 'Date',
         'time'         => 'Time',
     ],
+    'picker'      => [
+        'label'        => 'Date Picker',
+        'instructions' => 'Would you like to display a date/time picker?',
+        'warning'      => 'If disabled a basic masked input will be displayed.',
+    ],
     'date_format' => [
         'label'        => 'Date Format',
         'instructions' => 'Select the format for the date input.',

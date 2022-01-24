@@ -1,15 +1,16 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
+use Anomaly\Streams\Platform\Model\Variables\VariablesTestingEntryModel;
 use Carbon\Carbon;
 use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class DatetimeFieldTypeModifier
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class DatetimeFieldTypeModifier extends FieldTypeModifier
 {
@@ -32,7 +33,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
     /**
      * Create a new DatetimeFieldTypeModifier instance.
      *
-     * @param Repository        $config
+     * @param Repository $config
      * @param DatetimeFieldType $fieldType
      */
     public function __construct(Repository $config, DatetimeFieldType $fieldType)
@@ -94,6 +95,14 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         if ($this->fieldType->config('mode') !== 'date') {
             $value->setTimezone(array_get($this->fieldType->getConfig(), 'timezone'));
         }
+        
+        if ($this->fieldType->config('mode') == 'date') {
+            $value->startOfDay();
+        }
+
+        if ($this->fieldType->getEntry() instanceof VariablesTestingEntryModel) {
+            //dd($value->setTimezone($this->config->get('streams::datetime.database_timezone')));
+        }
 
         return $value;
     }
@@ -103,7 +112,7 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
      * based on the value.
      *
      * @param              $value
-     * @param  null        $timezone
+     * @param  null $timezone
      * @return Carbon|null
      * @throws \Exception
      */

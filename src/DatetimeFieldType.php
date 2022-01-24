@@ -3,7 +3,8 @@
 use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Illuminate\Config\Repository;
+use Carbon\Carbon;
+use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class DatetimeFieldType
@@ -24,13 +25,6 @@ class DatetimeFieldType extends FieldType
     protected $columnType = 'datetime';
 
     /**
-     * The input view.
-     *
-     * @var string
-     */
-    protected $inputView = 'anomaly.field_type.datetime::input';
-
-    /**
      * The field type rules.
      *
      * @var array
@@ -38,6 +32,20 @@ class DatetimeFieldType extends FieldType
     protected $rules = [
         'datetime',
     ];
+
+    /**
+     * The input view.
+     *
+     * @var string
+     */
+    protected $inputView = null;
+
+    /**
+     * The filter view.
+     *
+     * @var string
+     */
+    protected $filterView = 'anomaly.field_type.datetime::filter';
 
     /**
      * The field type validators.
@@ -58,6 +66,7 @@ class DatetimeFieldType extends FieldType
      */
     protected $config = [
         'mode'        => 'datetime',
+        'picker'      => true,
         'date_format' => null,
         'time_format' => null,
         'timezone'    => null,
@@ -82,7 +91,7 @@ class DatetimeFieldType extends FieldType
      * Create a new DatetimeFieldType instance.
      *
      * @param DatetimeConverter $converter
-     * @param Repository        $configuration
+     * @param Repository $configuration
      */
     public function __construct(DatetimeConverter $converter, Repository $configuration)
     {
@@ -142,24 +151,104 @@ class DatetimeFieldType extends FieldType
     }
 
     /**
+     * Get the input view.
+     *
+     * @return string
+     */
+    public function getInputView()
+    {
+        if ($view = parent::getInputView()) {
+            return $view;
+        }
+
+        if ($this->isPicker()) {
+            return 'anomaly.field_type.datetime::picker';
+        }
+
+        return 'anomaly.field_type.datetime::input';
+    }
+
+    /**
+     * Return if the picker
+     * is enabled or not.
+     *
+     * @return bool
+     */
+    public function isPicker()
+    {
+        return array_get($this->getConfig(), 'picker') == true;
+    }
+
+    /**
+     * Return the conversion map to use.
+     *
+     * @return string
+     */
+    public function converterMap()
+    {
+        return $this->isPicker() ? 'picker' : 'default';
+    }
+
+    /**
      * Get the date format
+     * for the plugin.
+     *
+     * @param null $mode
+     * @return string
+     */
+    public function getPluginFormat($mode = null)
+    {
+        return $this->converter->toJs(
+            $this->getDatetimeFormat($mode),
+            $this->converterMap()
+        );
+    }
+
+    /**
+     * Get the input value.
+     *
+     * @param null $default
+     * @return Carbon
+     */
+    public function getInputValue($default = null)
+    {
+        if (!$value = parent::getInputValue($default)) {
+            return null;
+        }
+
+        $value = (new Carbon())->createFromFormat(
+            $this->getInputFormat(),
+            $value,
+            array_get($this->getConfig(), 'timezone')
+        );
+
+        return $value;
+    }
+
+    /**
+     * Get the input format
      * for the plugin.
      *
      * @return string
      */
-    public function getPluginFormat()
+    public function getInputFormat()
     {
-        return $this->converter->toJs($this->getDatetimeFormat());
+        return $this->converter->toJs(
+            str_replace(':s', '', $this->getStorageFormat()),
+            $this->converterMap()
+        );
     }
 
     /**
      * Get the post format.
      *
+     * @param $mode
      * @return string
      */
-    public function getDatetimeFormat()
+    public function getDatetimeFormat($mode = null)
     {
-        $mode = array_get($this->getConfig(), 'mode');
+        $mode = $mode ?: array_get($this->getConfig(), 'mode');
+
         $date = array_get($this->getConfig(), 'date_format');
         $time = array_get($this->getConfig(), 'time_format');
 
@@ -216,5 +305,25 @@ class DatetimeFieldType extends FieldType
         }
 
         return null;
+    }
+
+    /**
+     * Get the placeholder.
+     *
+     * @return int|null|string
+     */
+    public function getPlaceholder()
+    {
+        $placeholder = parent::getPlaceholder();
+
+        if ($placeholder === false) {
+            return null;
+        }
+
+        if ($placeholder === null) {
+            return date($this->getDatetimeFormat());
+        }
+
+        return $placeholder;
     }
 }
