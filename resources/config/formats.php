@@ -2,6 +2,7 @@
 
 return [
     'date' => [
+        'F j, Y' => date('F j, Y'), // July 10, 2015
         'j F, Y' => date('j F, Y'), // 10 July, 2015
         'j M, y' => date('j M, y'), // 10 Jul, 15
         'm/d/Y'  => date('m/d/Y'), // 07/10/2015
