@@ -326,4 +326,15 @@ class DatetimeFieldType extends FieldType
 
         return $placeholder;
     }
+    
+    /**
+     * Pass calls through the value.
+     *
+     * @param string $method
+     * @param array $arguments
+     */
+    public function __call($method, $arguments)
+    {
+        return call_user_func_array([$this->value, $method], $arguments);
+    }
 }
