@@ -1,7 +1,6 @@
 <?php namespace Anomaly\DatetimeFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
-use Anomaly\Streams\Platform\Model\Variables\VariablesTestingEntryModel;
 use Carbon\Carbon;
 use Illuminate\Contracts\Config\Repository;
 
@@ -98,10 +97,6 @@ class DatetimeFieldTypeModifier extends FieldTypeModifier
         
         if ($this->fieldType->config('mode') == 'date') {
             $value->startOfDay();
-        }
-
-        if ($this->fieldType->getEntry() instanceof VariablesTestingEntryModel) {
-            //dd($value->setTimezone($this->config->get('streams::datetime.database_timezone')));
         }
 
         return $value;

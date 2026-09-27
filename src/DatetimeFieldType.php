@@ -116,7 +116,8 @@ class DatetimeFieldType extends FieldType
             timezone_identifiers_list()
         );
 
-        $formats = $this->configuration->get('anomaly.field_type.datetime::formats.date');
+        $dateFormats = $this->configuration->get('anomaly.field_type.datetime::formats.date');
+        $timeFormats = $this->configuration->get('anomaly.field_type.datetime::formats.time');
 
         // Check for default / erroneous timezone.
         if ((!$timezone = strtolower(array_get($config, 'timezone'))) || !in_array($timezone, $timezones)) {
@@ -133,9 +134,13 @@ class DatetimeFieldType extends FieldType
             $config['time_format'] = $this->configuration->get('streams::datetime.time_format');
         }
 
-        // Make sure format is supported.
-        if (!in_array($config['date_format'], array_keys($formats))) {
-            $config['date_format'] = array_first(array_keys($formats));
+        // Make sure formats are supported.
+        if (!in_array($config['date_format'], array_keys($dateFormats))) {
+            $config['date_format'] = array_first(array_keys($dateFormats));
+        }
+
+        if (!in_array($config['time_format'], array_keys($timeFormats))) {
+            $config['time_format'] = array_first(array_keys($timeFormats));
         }
 
         return $config;
