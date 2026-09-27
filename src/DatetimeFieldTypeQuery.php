@@ -26,42 +26,48 @@ class DatetimeFieldTypeQuery extends FieldTypeQuery
      */
     public function filter(Builder $query, FilterInterface $filter)
     {
+        $value = $filter->getValue();
 
-        /**
-         * Make sure the filter value
-         * is something we can use.
-         */
-        if (strpos($date = $filter->getValue(), ' to ') === false) {
-
-            $from = Carbon::createFromFormat(config('streams::datetime.date_format'), $date)
-                ->setTimezone(config('app.timezone'))
-                ->setTime(0, 0, 0) // Start at the beginning of the day.
-                ->setTimezone(config('streams::datetime.default_timezone'));
-
-            $to = Carbon::createFromFormat(config('streams::datetime.date_format'), $date)
-                ->setTimezone(config('app.timezone'))
-                ->setTime(23, 59, 59) // Include up to the end of the day.
-                ->setTimezone(config('streams::datetime.default_timezone'));
-
-            $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '>=', $from->format('Y-m-d H:i:s'));
-            $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '<=', $to->format('Y-m-d H:i:s'));
-
+        if (!is_string($value)) {
             return;
         }
 
-        list($from, $to) = explode(' to ', $filter->getValue());
+        if (strpos($value, ' to ') === false) {
+            $from = $to = $value;
+        } else {
+            list($from, $to) = explode(' to ', $value);
+        }
 
-        $from = Carbon::createFromFormat(config('streams::datetime.date_format'), $from)
+        if (!($from = $this->parse($from)) || !($to = $this->parse($to))) {
+            return;
+        }
+
+        $from = $from
             ->setTimezone(config('app.timezone'))
             ->setTime(0, 0, 0) // Start at the beginning of the day.
             ->setTimezone(config('streams::datetime.default_timezone'));
 
-        $to = Carbon::createFromFormat(config('streams::datetime.date_format'), $to)
+        $to = $to
             ->setTimezone(config('app.timezone'))
             ->setTime(23, 59, 59) // Include up to the end of the day.
             ->setTimezone(config('streams::datetime.default_timezone'));
 
         $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '>=', $from->format('Y-m-d H:i:s'));
         $query->whereDate($query->getQuery()->from . '.' . $filter->getField(), '<=', $to->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * Parse a filter date in the configured format.
+     *
+     * @param  string $value
+     * @return Carbon|null
+     */
+    protected function parse($value)
+    {
+        try {
+            return Carbon::createFromFormat(config('streams::datetime.date_format'), trim($value));
+        } catch (\InvalidArgumentException $exception) {
+            return null;
+        }
     }
 }
