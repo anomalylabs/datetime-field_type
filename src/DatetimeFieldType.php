@@ -4,6 +4,7 @@ use Anomaly\DatetimeFieldType\Support\DatetimeConverter;
 use Anomaly\DatetimeFieldType\Validation\ValidateDatetime;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Contracts\Config\Repository;
 
 /**
@@ -332,9 +333,14 @@ class DatetimeFieldType extends FieldType
      *
      * @param string $method
      * @param array $arguments
+     * @return mixed
      */
     public function __call($method, $arguments)
     {
+        if (!$this->value instanceof CarbonInterface) {
+            return null;
+        }
+
         return call_user_func_array([$this->value, $method], $arguments);
     }
 }

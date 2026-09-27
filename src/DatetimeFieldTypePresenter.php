@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 /**
  * Class DatetimeFieldTypePresenter
@@ -143,9 +144,10 @@ class DatetimeFieldTypePresenter extends FieldTypePresenter
      * @return mixed
      */
     public function __call($method, $arguments)
-    {    
-        // Check if carbon has the method.
-        if (is_string($value = $this->object->getValue()) && method_exists($value, $method)) {
+    {
+        $value = $this->object->getValue();
+
+        if ($value instanceof CarbonInterface && method_exists($value, $method)) {
             return call_user_func_array([$value, $method], $arguments);
         }
 
